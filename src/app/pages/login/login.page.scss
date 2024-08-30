@@ -1,3 +1,16 @@
-form{
+.box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     text-align: center;
+}
+
+.botones{
+    margin-top: 10px;
+}
+
+#formulario{
+    border-radius: 10px;
 }

@@ -6,24 +6,23 @@
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input type="email" required></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" required></ion-input>
-    </ion-item>
-
-    <div class="forgot-password">
-      <a routerLink="/forgot-password">Olvidé mi contraseña</a>
-    </div>
-
-    <ion-button type="submit">Iniciar Sesión</ion-button>
-
-    <ion-button fill="outline" routerLink="/register">Crear Cuenta</ion-button>
-
-  </form>
+  <div class="box">
+    <ion-list id="formulario">
+      <ion-item>
+        <ion-input label="Usuario" placeholder="Ejemplo@gmail.com" type="email" required></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-input type="password" label="Contraseña" labelPlacement="fixed" placeholder="*******"></ion-input>
+      </ion-item>
+  
+      <div class="botones">
+        <ion-button type="submit">Iniciar Sesión</ion-button>
+        <br>
+        <ion-button fill="outline" routerLink="/register">Crear Cuenta</ion-button>
+      </div>
+    
+    </ion-list>
+  </div>
 </ion-content>
