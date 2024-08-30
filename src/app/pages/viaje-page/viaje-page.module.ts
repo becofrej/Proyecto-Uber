@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ViajePagePageRoutingModule } from './viaje-page-routing.module';
 
 import { ViajePagePage } from './viaje-page.page';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViajePagePageRoutingModule
-  ],
+    ViajePagePageRoutingModule,
+    SharedModule
+],
   declarations: [ViajePagePage]
 })
 export class ViajePagePageModule {}

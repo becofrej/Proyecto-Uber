@@ -13,15 +13,19 @@ const routes: Routes = [
   },
   {
     path: 'perfil-page',
-    loadChildren: () => import('./perfil-page/perfil-page.module').then( m => m.PerfilPagePageModule)
+    loadChildren: () => import('./pages/perfil-page/perfil-page.module').then( m => m.PerfilPagePageModule)
   },
   {
     path: 'vehiculo-page',
-    loadChildren: () => import('./vehiculo-page/vehiculo-page.module').then( m => m.VehiculoPagePageModule)
+    loadChildren: () => import('./pages/vehiculo-page/vehiculo-page.module').then( m => m.VehiculoPagePageModule)
   },
   {
     path: 'viaje-page',
-    loadChildren: () => import('./viaje-page/viaje-page.module').then( m => m.ViajePagePageModule)
+    loadChildren: () => import('./pages/viaje-page/viaje-page.module').then( m => m.ViajePagePageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
 ];
 
