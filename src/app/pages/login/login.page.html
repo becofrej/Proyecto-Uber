@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <app-back-button></app-back-button>
-    <ion-title>Iniciar Sesión</ion-title>
+    <ion-title>Iniciar sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,17 +10,17 @@
   <div class="box">
     <ion-list id="formulario">
       <ion-item>
-        <ion-input [(ngModel)]="correo" label="Usuario" placeholder="Ejemplo@gmail.com" type="email" required></ion-input>
+        <ion-input [(ngModel)]="correo" label="Usuario:" placeholder="ejemplo@gmail.com" type="email" required></ion-input>
       </ion-item>
     
       <ion-item>
-        <ion-input [(ngModel)]="password" type="password" label="Contraseña" labelPlacement="fixed" placeholder="*******"></ion-input>
+        <ion-input [(ngModel)]="password" type="password:" label="Contraseña:" labelPlacement="fixed" placeholder="**********"></ion-input>
       </ion-item>
   
       <div class="botones">
-        <ion-button type="submit">Iniciar Sesión</ion-button>
+        <ion-button type="submit">Iniciar sesión</ion-button>
         <br>
-        <ion-button fill="outline" routerLink="/register">Crear Cuenta</ion-button>
+        <ion-button fill="outline" routerLink="/register">Crear cuenta</ion-button>
         <br>
       </div>
     
