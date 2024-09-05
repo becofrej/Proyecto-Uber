@@ -10,17 +10,18 @@
   <div class="box">
     <ion-list id="formulario">
       <ion-item>
-        <ion-input label="Usuario" placeholder="Ejemplo@gmail.com" type="email" required></ion-input>
+        <ion-input [(ngModel)]="correo" label="Usuario" placeholder="Ejemplo@gmail.com" type="email" required></ion-input>
       </ion-item>
     
       <ion-item>
-        <ion-input type="password" label="Contraseña" labelPlacement="fixed" placeholder="*******"></ion-input>
+        <ion-input [(ngModel)]="password" type="password" label="Contraseña" labelPlacement="fixed" placeholder="*******"></ion-input>
       </ion-item>
   
       <div class="botones">
         <ion-button type="submit">Iniciar Sesión</ion-button>
         <br>
         <ion-button fill="outline" routerLink="/register">Crear Cuenta</ion-button>
+        <br>
       </div>
     
     </ion-list>
