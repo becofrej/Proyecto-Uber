@@ -1,0 +1,7 @@
+Iniciar servidor:
+
+ionic s
+
+Iniciar servidor sin nueva pestaña:
+
+ionic serve --no-open
