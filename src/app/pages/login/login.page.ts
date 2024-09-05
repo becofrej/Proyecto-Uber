@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +11,15 @@ export class LoginPage implements OnInit {
   correo:string = "";
   password:string = "";
 
-  constructor(private router:Router) { }
+  constructor(private ActivatedRoute:ActivatedRoute,
+              private router:Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  viaje(){
+    this.router.navigateByUrl('viaje-page');
   }
 
 }
