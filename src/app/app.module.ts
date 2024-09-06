@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot({mode: 'md'}), 
     AppRoutingModule,     
     MatSidenavModule,
     MatButtonModule,

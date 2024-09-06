@@ -1,3 +1,35 @@
 {
-  "typescript.preferences.autoImportFileExcludePatterns": ["@ionic/angular/common", "@ionic/angular/standalone"]
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "@ionic/angular/common",
+    "@ionic/angular/standalone"
+  ],
+  "cSpell.words": [
+    "boton",
+    "carácteres",
+    "Confirmar",
+    "contraseña",
+    "correo",
+    "debe",
+    "dirección",
+    "ingresada",
+    "ingresado",
+    "ingresar",
+    "Ingrese",
+    "menos",
+    "minlenght",
+    "Nombre",
+    "número",
+    "obligatorio",
+    "Olvidaste",
+    "pasword",
+    "Registrarse",
+    "Regístrate",
+    "requerida",
+    "requerido",
+    "teléfono",
+    "tener",
+    "válida",
+    "Validaciones",
+    "válido"
+  ]
 }
