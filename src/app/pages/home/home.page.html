@@ -1,0 +1,40 @@
+<ion-menu contentId="main-content" side="start">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/perfil-page">Ir a Perfil</ion-item>
+      <ion-item routerLink="/vehiculo-page">Ir a Vehículo</ion-item>
+      <ion-item routerLink="/viaje-page">Ir a Viaje</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Main content area -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Proyecto Uber
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="main-content">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-button [routerLink]="['/perfil-page']">Ir a perfil-page</ion-button>
+    <ion-button [routerLink]="['/vehiculo-page']">Ir a vehiculo-page</ion-button>
+    <ion-button [routerLink]="['/viaje-page']">Ir a viaje-page</ion-button>
+  </div>
+</ion-content>
