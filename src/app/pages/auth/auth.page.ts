@@ -17,7 +17,7 @@ export class AuthPage implements OnInit {
   constructor(private router: Router) { }
 
   goHome() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/main/home']);
   }
 
   ngOnInit() {
