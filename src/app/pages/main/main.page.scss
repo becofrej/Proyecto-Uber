@@ -27,9 +27,12 @@ h5{
     font-weight: bold;
 }
 
-.avatar-icon{
-    font-size: 100px;
-}
+.avatar-icon {
+    width: 100px;  
+    height: 100px;
+    border-radius: 50%;  
+    object-fit: cover;  
+}  
 
 ion-menu{
     --width: 254px;

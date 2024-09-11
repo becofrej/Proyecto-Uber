@@ -7,18 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  items: string[] = [];
 
-  constructor(private router: Router) { }
-
-  goAddTrip() {
-    this.router.navigate(['/main/add-trip']);
-  }
+  constructor() { }
 
   ngOnInit() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push(`Viaje ${i}`)
-    }
   }
 
 

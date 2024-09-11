@@ -71,3 +71,12 @@ ion-button {
     padding: 20px;
 }
 
+/* Ocultar la barra de desplazamiento sin bloquear el desplazamiento */
+ion-content::-webkit-scrollbar {
+    display: none;
+  }
+  
+  ion-content {
+    --overflow: auto; /* Asegura el desplazamiento en dispositivos con pantalla táctil */
+  }
+  

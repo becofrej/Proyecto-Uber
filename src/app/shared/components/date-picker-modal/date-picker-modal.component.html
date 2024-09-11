@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Seleccionar Fecha</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-datetime
+    [value]="selectedDate"
+    (ionChange)="onDateChange($event)"
+    presentation="date"
+  ></ion-datetime>
+</ion-content>

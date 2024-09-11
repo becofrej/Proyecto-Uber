@@ -2,22 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-car',
-  templateUrl: './car.page.html',
-  styleUrls: ['./car.page.scss'],
+  selector: 'app-trip',
+  templateUrl: './trip.page.html',
+  styleUrls: ['./trip.page.scss'],
 })
-export class CarPage implements OnInit {
+export class TripPage implements OnInit {
   items: string[] = [];
 
   constructor(private router: Router) { }
 
-  goAddCar() {
-    this.router.navigate(['/main/add-car']);
+  goAddTrip() {
+    this.router.navigate(['/main/add-trip']);
   }
+
 
   ngOnInit() {
     for (let i = 1; i < 11; i++) {
-      this.items.push(`Vehículo ${i}`)
+      this.items.push(`Viaje ${i}`)
     }
   }
 
