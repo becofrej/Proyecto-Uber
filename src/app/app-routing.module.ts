@@ -8,18 +8,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'vehiculo-page',
-    loadChildren: () => import('./pages/vehiculo-page/vehiculo-page.module').then( m => m.VehiculoPagePageModule)
-  },
-  {
-    path: 'viaje-page',
-    loadChildren: () => import('./pages/viaje-page/viaje-page.module').then( m => m.ViajePagePageModule)
-  },
-  {
-    path: 'new-viaje',
-    loadChildren: () => import('./pages/new-viaje/new-viaje.module').then( m => m.NewViajePageModule)
-  },
-  {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule)
   },
@@ -27,8 +15,6 @@ const routes: Routes = [
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
   },
-
-
 ];
 
 @NgModule({

@@ -18,6 +18,20 @@ const routes: Routes = [
       },
     ],
   },
+
+  {
+    path: 'new-trip',
+    loadChildren: () => import('./new-trip/new-trip.module').then( m => m.NewTripPageModule)
+  },
+  {
+    path: 'driver',
+    loadChildren: () => import('./driver/driver.module').then( m => m.DriverPageModule)
+  },
+  {
+    path: 'new-driver',
+    loadChildren: () => import('./new-driver/new-driver.module').then( m => m.NewDriverPageModule)
+  },
+
   
 
 ];

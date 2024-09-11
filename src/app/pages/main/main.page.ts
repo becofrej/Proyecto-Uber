@@ -11,7 +11,7 @@ export class MainPage implements OnInit {
   pages = [
     { title: 'Menú', url: '/main/home', icon: 'home-outline'},
     { title: 'Perfil', url: '/main/profile', icon: 'person-outline'},
-    { title: 'Iniciar sesión', url: '/auth', icon: 'enter-outline'},
+    { title: 'Configuración', url: '#', icon: 'settings-outline'},
 
 
   ]

@@ -1,9 +1,10 @@
-<app-header title="H O M E"></app-header>
+<app-header [showMenu]="true" title="H O M E"></app-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+    <ion-buttons slot="start">
+        <ion-button>
+            <ion-icon slot="start" name="add"></ion-icon>
+            Click me
+        </ion-button>
+    </ion-buttons>
 </ion-content>

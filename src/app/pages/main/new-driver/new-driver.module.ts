@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NewViajePageRoutingModule } from './new-viaje-routing.module';
+import { NewDriverPageRoutingModule } from './new-driver-routing.module';
 
-import { NewViajePage } from './new-viaje.page';
+import { NewDriverPage } from './new-driver.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewViajePageRoutingModule
+    NewDriverPageRoutingModule
   ],
-  declarations: [NewViajePage]
+  declarations: [NewDriverPage]
 })
-export class NewViajePageModule {}
+export class NewDriverPageModule {}
