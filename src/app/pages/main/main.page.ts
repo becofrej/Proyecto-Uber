@@ -11,6 +11,7 @@ export class MainPage implements OnInit {
   pages = [
     { title: 'Menú', url: '/main/home', icon: 'home-outline'},
     { title: 'Perfil', url: '/main/profile', icon: 'person-outline'},
+    { title: 'Vehículos', url: '/main/car', icon: 'car-sport-outline'},
     { title: 'Configuración', url: '#', icon: 'settings-outline'},
 
 
@@ -19,7 +20,7 @@ export class MainPage implements OnInit {
   goAuth() {
     this.router.navigate(['/auth']);
   }
-
+    
   router = inject(Router);
   currentPath: string = '';
   

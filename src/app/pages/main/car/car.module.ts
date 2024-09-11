@@ -4,17 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NewDriverPageRoutingModule } from './new-driver-routing.module';
+import { CarPageRoutingModule } from './car-routing.module';
 
-import { NewDriverPage } from './new-driver.page';
+import { CarPage } from './car.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewDriverPageRoutingModule
+    CarPageRoutingModule,
+    SharedModule
   ],
-  declarations: [NewDriverPage]
+  declarations: [CarPage]
 })
-export class NewDriverPageModule {}
+export class CarPageModule {}

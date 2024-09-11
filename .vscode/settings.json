@@ -4,6 +4,7 @@
     "@ionic/angular/standalone"
   ],
   "cSpell.words": [
+    "Agregar",
     "boton",
     "carácteres",
     "Confirmar",
@@ -30,6 +31,7 @@
     "tener",
     "válida",
     "Validaciones",
-    "válido"
+    "válido",
+    "viaje"
   ]
 }

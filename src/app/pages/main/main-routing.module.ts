@@ -1,3 +1,4 @@
+import { CarPage } from './car/car.page';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -16,22 +17,23 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
       },
+      {
+        path: 'car',
+        loadChildren: () => import('./car/car.module').then( m => m.CarPageModule)
+      },
+      {
+        path: 'add-car',
+        loadChildren: () => import('./add-car/add-car.module').then( m => m.AddCarPageModule)
+      },
+      {
+        path: 'add-trip',
+        loadChildren: () => import('./add-trip/add-trip.module').then( m => m.AddTripPageModule)
+      },
+    
     ],
   },
 
-  {
-    path: 'new-trip',
-    loadChildren: () => import('./new-trip/new-trip.module').then( m => m.NewTripPageModule)
-  },
-  {
-    path: 'driver',
-    loadChildren: () => import('./driver/driver.module').then( m => m.DriverPageModule)
-  },
-  {
-    path: 'new-driver',
-    loadChildren: () => import('./new-driver/new-driver.module').then( m => m.NewDriverPageModule)
-  },
-
+ 
   
 
 ];

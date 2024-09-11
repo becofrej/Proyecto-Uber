@@ -1,10 +1,17 @@
-<app-header [showMenu]="true" title="H O M E"></app-header>
+<app-header [showMenu]="true" title="Viajes"></app-header>
 
-<ion-content>
-    <ion-buttons slot="start">
-        <ion-button>
-            <ion-icon slot="start" name="add"></ion-icon>
-            Click me
-        </ion-button>
-    </ion-buttons>
+<ion-content fixed-slot-placement="before">
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <ion-fab-button (click)="goAddTrip()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-list>
+        <ion-item [button]="true" *ngFor="let item of items; let index">
+          <ion-avatar slot="start">
+            <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+          </ion-avatar>
+          <ion-label>{{ item }}</ion-label>
+        </ion-item>
+      </ion-list>
 </ion-content>
