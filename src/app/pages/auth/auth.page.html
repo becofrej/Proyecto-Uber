@@ -38,7 +38,7 @@
       
       <p routerLink="forgot-password" class="ion-text-end">¿Olvidaste tu contraseña?</p>
 
-      <ion-button expand="block" mode="android" class="submit" type="submit" [disabled]="form.invalid">
+      <ion-button (click)="goHome()" expand="block" mode="android" class="submit" type="submit" [disabled]="form.invalid">
         Ingresar
         <ion-icon slot="end" name="log-in-outline"></ion-icon>
       </ion-button>
