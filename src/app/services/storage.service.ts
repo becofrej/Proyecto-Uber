@@ -15,4 +15,13 @@ export class StorageService {
     
   }
 
+  async getItem(llave:string){
+    const obj = await Preferences.get({key:llave});
+    return obj;
+  }
+
+  async addToken(dataJson:any){
+    this.setItem(llaveUber,JSON.stringify(dataJson));
+  }
+
 }

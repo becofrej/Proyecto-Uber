@@ -12,9 +12,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+// ======== Firebase ========
 import { AngularFireModule} from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,8 +26,6 @@ import { environment } from 'src/environments/environment';
     MatButtonModule,
     MatIconModule,
     AngularFireModule,
-    AngularFireAuthModule,
-    AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync()],
   bootstrap: [AppComponent],
