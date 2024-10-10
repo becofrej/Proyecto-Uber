@@ -14,7 +14,8 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 - Crear un elemento Loading al iniciar sesión
 - Validaciones en el inicio de sesión (usuario falso registrado como variable)
 - Mostrar los datos del usuario en la consola en formato JSON (demuestra dominio en la manipulación de datos)
-- Crear un servicio llamado user o usuario que nos permita agregar usuarios a la api, el servicio contiene un metodo async
+- Crear un servicio llamado user o usuario que nos permita agregar usuarios a la api, el servicio contiene un metodo async.
+- Usar capacitor plugins
 
 ### ¿Que haremos nosotros?
 
