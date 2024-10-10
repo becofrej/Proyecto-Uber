@@ -9,7 +9,8 @@ export const environment = {
     storageBucket: "tellevo-a9c14.appspot.com",
     messagingSenderId: "906252892202",
     appId: "1:906252892202:web:06805c6604c7eb752d2b53"
-  }
+  },
+  apiUrl:"https://uber-nodejs-server-git-d61f89-guillermovillacuratorres-projects.vercel.app/api/"
 };
 
 
