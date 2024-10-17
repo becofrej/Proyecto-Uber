@@ -1,3 +1,4 @@
+import { Storage } from './../../../../node_modules/@angular/fire/storage/storage.d';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,18 +17,22 @@ export class AuthPage implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
-  }
-
-  // Modificación: pasar correo a la URL al redirigir
   goHome() {
     const email = this.form.controls.email.value;
     this.router.navigate(['/main/home'], { queryParams: { email: email } });
   }
 
+  ngOnInit() {
+  }
+
   submit(){
-    console.log(this.form.value);
-    this.goHome();
+    if (this.form.valid) {
+      this.goHome();
+    } else {
+      console.log('Formulario no válido');
+    }
   }
 
 }
+
+  
