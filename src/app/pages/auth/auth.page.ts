@@ -1,4 +1,3 @@
-import { Storage } from './../../../../node_modules/@angular/fire/storage/storage.d';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,17 +16,18 @@ export class AuthPage implements OnInit {
 
   constructor(private router: Router) { }
 
-  goHome() {
-    this.router.navigate(['/main/home']);
+  ngOnInit() {
   }
 
-  ngOnInit() {
+  // Modificación: pasar correo a la URL al redirigir
+  goHome() {
+    const email = this.form.controls.email.value;
+    this.router.navigate(['/main/home'], { queryParams: { email: email } });
   }
 
   submit(){
     console.log(this.form.value);
+    this.goHome();
   }
 
 }
-
-  
