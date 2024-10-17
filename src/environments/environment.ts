@@ -1,5 +1,3 @@
-import { initializeApp } from "firebase/app";
-
 export const environment = {
   production: false,
   firebaseConfig: {
@@ -12,8 +10,3 @@ export const environment = {
   },
   apiUrl:"https://uber-nodejs-server-git-d61f89-guillermovillacuratorres-projects.vercel.app/api/"
 };
-
-
-
-// Initialize Firebase
-const app = initializeApp();

@@ -14,8 +14,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // ======== Firebase ========
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule} from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 
 @NgModule({
@@ -27,8 +30,8 @@ import { environment } from 'src/environments/environment';
     MatButtonModule,
     MatIconModule,
     AngularFireModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync(), provideHttpClient()],
+    AngularFireAuthModule,AngularFireModule.initializeApp(environment.firebaseConfig)],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync(), provideHttpClient(), provideFirebaseApp(() => initializeApp({"projectId":"tellevoapp-duoc-d6cd2","appId":"1:537205520709:web:ac88b485910e9ef649e62c","storageBucket":"tellevoapp-duoc-d6cd2.appspot.com","apiKey":"AIzaSyDb4-RBeaUWEvUE5rMkuRgaFevY9pZo1MY","authDomain":"tellevoapp-duoc-d6cd2.firebaseapp.com","messagingSenderId":"537205520709"})), provideAuth(() => getAuth())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
