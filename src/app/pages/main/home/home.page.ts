@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';  
 
@@ -20,8 +22,6 @@ export class HomePage implements OnInit {
     this.getCurrentPosition();
   }
 
-
-  
   async getCurrentPosition() {
     try {
       const coordinates = await Geolocation.getCurrentPosition();
@@ -38,4 +38,5 @@ export class HomePage implements OnInit {
       // Si no se puede obtener la ubicación, seguimos mostrando el mapa predeterminado
     }
   }
+
 }
