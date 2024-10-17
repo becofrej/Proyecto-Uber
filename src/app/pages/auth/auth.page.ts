@@ -18,14 +18,19 @@ export class AuthPage implements OnInit {
   constructor(private router: Router) { }
 
   goHome() {
-    this.router.navigate(['/main/home']);
+    const email = this.form.controls.email.value;
+    this.router.navigate(['/main/home'], { queryParams: { email: email } });
   }
 
   ngOnInit() {
   }
 
   submit(){
-    console.log(this.form.value);
+    if (this.form.valid) {
+      this.goHome();
+    } else {
+      console.log('Formulario no válido');
+    }
   }
 
 }
