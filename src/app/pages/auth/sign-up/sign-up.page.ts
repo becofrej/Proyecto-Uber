@@ -18,7 +18,9 @@ export class SignUpPage implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.minLength(9)]),
-    password: new FormControl('', [Validators.required])
+    address: new FormControl('', [Validators.required, Validators.minLength(15)]),
+    password: new FormControl('', [Validators.required]),
+    confirmPassword: new FormControl('', [Validators.required])
   });
 
   imagen: any;
@@ -33,7 +35,8 @@ export class SignUpPage implements OnInit {
     private storage: StorageService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async submit() {
     if (this.isSubmitting) {
