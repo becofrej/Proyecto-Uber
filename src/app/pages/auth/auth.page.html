@@ -1,16 +1,16 @@
 <app-header title="Inicio de sesión"></app-header>
 <ion-content>
 
-
   <div class="password-flex-center">
 
-    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()" >
+    <!-- Formulario de inicio de sesión -->
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="login()" (keypress.enter)="login()">
 
       <app-logo></app-logo>
 
       <!-- Input de email -->
       <app-custom-input 
-      autocommplete="email"
+      autocomplete="email"
       icon="mail-outline"
       [control]="form.controls.email"
       type="email"
@@ -38,18 +38,20 @@
       
       <p routerLink="forgot-password" class="ion-text-end">¿Olvidaste tu contraseña?</p>
 
-      <ion-button (click)="goHome()" expand="block" mode="android" class="submit" type="submit"> <!-- [disabled]="form.invalid" -->
+      <!-- Botón de ingresar -->
+      <ion-button expand="block" mode="android" class="submit" type="submit" [disabled]="form.invalid"> <!-- Deshabilitado si el formulario es inválido -->
         Ingresar
         <ion-icon slot="end" name="log-in-outline"></ion-icon>
       </ion-button>
+
+      <!-- Botón de registro -->
       <ion-button class="ion-margin-top" routerLink="sign-up" expand="block" mode="android" fill="outline">
         Regístrate
         <ion-icon slot="end" name="person-add-outline"></ion-icon>
       </ion-button>
 
-
     </form>
 
-</div>
+  </div>
 
 </ion-content>
