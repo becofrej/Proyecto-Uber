@@ -17,13 +17,11 @@ export class AuthPage implements OnInit {
 
   token: string = '';  // Almacenar el token de Firebase
   usuario: UserModel[] = [];   // Datos del usuario desde la API
+
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
-  
-  token: string = '';  // Almacenar el token de Firebase
-  usuario: UserModel[] = [];   // Datos del usuario desde la API
 
   constructor(
     private router: Router,
@@ -71,7 +69,7 @@ export class AuthPage implements OnInit {
           await this.storage.agregarToken(jsonToken);  // Guardar el token y usuario
 
           // Navegar a la página principal
-          this.router.navigateByUrl("/main/home");
+          this.goToHome();
 
           // Mostrar mensaje de éxito
           await this.helper.showAlert("Inicio de sesión exitoso", "Bienvenido");
