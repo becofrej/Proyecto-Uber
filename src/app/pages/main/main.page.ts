@@ -1,3 +1,4 @@
+import { Preferences } from '@capacitor/preferences';
 import { Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 
@@ -17,14 +18,16 @@ export class MainPage implements OnInit {
 
   ]
 
-  goAuth() {
-    this.router.navigate(['/auth']);
-  }
-    
   router = inject(Router);
   currentPath: string = '';
   
+  async goAuth() {
+    // Limpiar cualquier dato almacenado en las preferencias
+    await Preferences.clear();
 
+    // Redirigir al usuario a la página de autenticación
+    this.router.navigate(['/auth']);
+  }
   
   ngOnInit() {
     this.router.events.subscribe((event: any) => {
