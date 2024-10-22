@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirebaseService } from 'src/app/services/firebase.service';  // Servicio de Firebase
+import { UsuarioService } from 'src/app/services/user/usuario.service';  // Servicio de la API REST
+import { Camera, CameraResultType } from '@capacitor/camera';  // Cámara de Capacitor
+import { HelperService } from 'src/app/services/helper.service';  // Servicio de ayuda para alertas y loaders
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,30 +20,111 @@ export class SignUpPage implements OnInit {
     phone: new FormControl('', [Validators.required, Validators.minLength(9)]),
     address: new FormControl('', [Validators.required, Validators.minLength(15)]),
     password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required])
   });
 
-  constructor(private router: Router) { }
+  imagen: any;
+  token: string = '';
+  isSubmitting: boolean = false;
+
+  constructor(
+    private router: Router,
+    private firebase: FirebaseService,
+    private usuarioService: UsuarioService,
+    private helper: HelperService,
+    private storage: StorageService
+  ) { }
 
   ngOnInit() {
   }
 
-  submit() {
-    if (this.form.valid) {
-      // El formulario es válido, imprimimos los datos en JSON
-      const formData = this.form.value;
-      console.log('Datos del usuario en formato JSON:', JSON.stringify(formData));
+  async submit() {
+    if (this.isSubmitting) {
+      console.log('Proceso de registro en curso, por favor espera...');
+      return;
+    }
 
-      this.router.navigate(['/auth'])
-    } else {
-      // El formulario no es válido, imprimimos los errores específicos
-      console.log('El formulario no es válido. Errores:');
-      Object.keys(this.form.controls).forEach(key => {
-        const controlErrors = this.form.get(key)?.errors;
-        if (controlErrors) {
-          console.log(`Error en ${key}:`, controlErrors);
+    this.form.markAllAsTouched();
+
+    if (this.form.valid) {
+      this.isSubmitting = true;
+      const loader = await this.helper.showLoader("Cargando...");
+
+      try {
+        const userFirebase = await this.firebase.registro(this.form.value.email, this.form.value.password);
+        const token = await userFirebase.user?.getIdToken();
+
+        if (token) {
+          this.token = token;
+
+          const req = await this.usuarioService.agregarUsuario({
+            p_correo_electronico: this.form.value.email,
+            p_nombre: this.form.value.name,
+            p_telefono: this.form.value.phone,
+            token: this.token
+          }, this.imagen);
+
+          if (req && req.data && req.message === 'Usuario agregado correctamente!') {
+            const jsonToken = [
+              {
+                "token": this.token,
+                "usuario_correo": this.form.value.email
+              }
+            ];
+
+            await this.storage.agregarToken(jsonToken);
+
+            const formData = this.form.value;
+            console.log('Datos del usuario en formato JSON:', JSON.stringify(formData));
+
+            await this.helper.showAlert("Usuario registrado correctamente.", "Información");
+            this.router.navigate(['/auth']);
+          } else {
+            console.error('La API no devolvió los datos esperados:', req);
+            await this.helper.showAlert("Error al registrar el usuario. Por favor, intente nuevamente.", "Error");
+          }
+
+        } else {
+          console.log('No se obtuvo el token de Firebase.');
+          await this.helper.showAlert('Error al obtener el token de autenticación.', 'Error');
         }
-      });
+
+      } catch (error: any) {
+        console.error('Error durante el registro:', error);
+
+        let msg = "Ocurrió un error durante el registro.";
+        if (error.code === "auth/email-already-in-use") {
+          msg = "El correo ya está registrado.";
+        } else if (error.code === "auth/weak-password") {
+          msg = "La contraseña es muy débil.";
+        }
+
+        await this.helper.showAlert(msg, "Error");
+
+      } finally {
+        this.isSubmitting = false;
+        loader.dismiss();
+      }
+    } else {
+      console.log('Formulario inválido. Por favor revise los campos.');
+    }
+  }
+
+  async takePhoto() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri
+    });
+
+    if (image.webPath) {
+      const response = await fetch(image.webPath);
+      const blob = await response.blob();
+
+      this.imagen = {
+        fname: 'foto.' + image.format,
+        src: image.webPath,
+        file: blob
+      };
     }
   }
 }
