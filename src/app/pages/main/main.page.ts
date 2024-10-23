@@ -1,3 +1,5 @@
+import { Preferences } from '@capacitor/preferences';
+import { getAuth, signOut } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 
@@ -17,14 +19,25 @@ export class MainPage implements OnInit {
 
   ]
 
-  goAuth() {
-    this.router.navigate(['/auth']);
-  }
-    
   router = inject(Router);
+  auth = getAuth(); // Inicializar Firebase Authentication
   currentPath: string = '';
   
+  async goAuth() {
+    // Limpiar cualquier dato almacenado en las preferencias locales
+    await Preferences.clear();
 
+    // Cerrar sesión en Firebase
+    await signOut(this.auth)
+      .then(() => {
+        console.log('Sesión cerrada exitosamente en Firebase');
+        // Redirigir al usuario a la página de autenticación
+        this.router.navigate(['/auth']);
+      })
+      .catch((error) => {
+        console.error('Error al cerrar sesión en Firebase:', error);
+      });
+  }
   
   ngOnInit() {
     this.router.events.subscribe((event: any) => {
