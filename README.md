@@ -20,13 +20,13 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 ---
 
 >[!NOTE]
->- ⚠️"Por implementar"
+>- ⚠️ "Por implementar"
 >- ✅ "Realizado"
 >- ❌ "Error en la implementación"
 >- 🛠️ "Realizando"
 
 ### 1. Firebase 
-- Login y LogOut 🛠️
+- Login y LogOut ✅
 - ResetPassword ✅
 - Registro ✅
 ### 2. Persistencia de datos (Plugin capacitor Preferences) ⚠️
@@ -42,10 +42,10 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 - Agregar vehículo 
 - Agregar viaje 
 - Actualizar estado viaje 
-### 4. Protección de rutas con AuthGuard implementado con firebase. 🛠️
+### 4. Protección de rutas con AuthGuard implementado con firebase. ✅
 - Implementación página error 404. 
 ### 5. Implementación de plugin a elección. ✅
-### 6. Animación nativa de ionic (Animations). (Animación del Modal) ⚠️
+### 6. Animación nativa de ionic (Animations). (Animación del Modal) ✅
 - No debe iniciar la reproducción de la animación desde un botón que diga explícitamente “PLAY”, es 
 decir, se debe animar desde una interacción con el usuario. 
 
@@ -53,3 +53,6 @@ decir, se debe animar desde una interacción con el usuario.
 
 ### API del docente:
 https://uber-nodejs-server-git-d61f89-guillermovillacuratorres-projects.vercel.app/api/
+
+### Web del docente:
+https://uber.matiivilla.cl/inicio
