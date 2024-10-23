@@ -18,6 +18,11 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     
+    this.route.queryParams.subscribe(params => {
+      this.userEmail = params['email'];
+      console.log('Correo del usuario: ', this.userEmail)
+    })
+
     // Establecemos una URL predeterminada para el mapa
     this.currentLocation = this.sanitizer.bypassSecurityTrustResourceUrl(
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52018.62887805105!2d-71.69505781649906!3d-35.42595966105803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9665c6a2ac07d07d%3A0x265657feafdac8b8!2sTalca%2C%20Maule!5e0!3m2!1ses-419!2scl!4v1729197556863!5m2!1ses-419!2scl"
