@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true" class="ion-text-center not-found-page">
+  <!-- Encabezado (opcional) -->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Página no encontrada</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Contenido principal de la página 404 -->
+  <div class="not-found-container">
+    <!-- Icono de advertencia o error -->
+    <ion-icon name="warning-outline" class="not-found-icon"></ion-icon>
+
+    <!-- Mensaje principal -->
+    <h1>404</h1>
+    <p>Lo sentimos, la página que estás buscando no existe.</p>
+
+    <!-- Botón para regresar al inicio -->
+    <ion-button
+      expand="block"
+      size="large"
+      routerLink="/auth"
+      color="primary"
+      class="return-home-btn"
+    >
+      <ion-icon slot="start" name="home-outline"></ion-icon>
+      Volver al inicio
+    </ion-button>
+  </div>
+</ion-content>
