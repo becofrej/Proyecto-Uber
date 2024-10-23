@@ -68,14 +68,14 @@
       <img *ngIf="imagen" [src]="imagen.src" height="100" width="100" alt="Vista previa de la imagen">
 
       <!-- Botón para capturar foto -->
-      <ion-button (click)="takePhoto()" fill="outline">
+      <ion-button (click)="takePhoto()" fill="solid">
         <ion-icon style="margin-right: 10px;" name="camera-outline"></ion-icon>
         Tomar foto
       </ion-button>
 
       <!-- Botón de registro -->
-      <ion-button expand="block" fill="solid" type="submit">
-        Registrarse
+      <ion-button expand="block" fill="solid" type="submit" class="custom-green-button">
+        Registrarme
         <ion-icon slot="end" name="person-add-outline"></ion-icon>
       </ion-button>
 
