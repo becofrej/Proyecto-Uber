@@ -33,11 +33,11 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 - Agregar Datos 
 - Obtener Datos 
 ### 3. Consumo de apiRest ⚠️
-1. **Métodos GET:** 
+1. **Métodos GET:** 🛠️
 - Obtener usuario 
 - Obtener vehículo 
 - Obtener viajes 
-2. **Métodos POST:** 🛠️
+2. **Métodos POST:** 
 - Agregar usuario ✅
 - Agregar vehículo 
 - Agregar viaje 
