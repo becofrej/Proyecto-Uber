@@ -80,3 +80,9 @@ ion-content::-webkit-scrollbar {
     --overflow: auto; /* Asegura el desplazamiento en dispositivos con pantalla táctil */
   }
   
+  .custom-register-button {
+    --background: #28a745;  /* Aquí puedes cambiar a cualquier código de color verde */
+    --background-activated: #218838;
+    --background-focused: #28a745;
+    --background-hover: #28a745;
+  }
