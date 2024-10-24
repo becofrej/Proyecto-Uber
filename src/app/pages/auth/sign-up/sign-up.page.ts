@@ -1,10 +1,11 @@
+import { Preferences } from '@capacitor/preferences';  // Importamos el plugin Preferences
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FirebaseService } from 'src/app/services/firebase.service';  // Servicio de Firebase
-import { UsuarioService } from 'src/app/services/user/usuario.service';  // Servicio de la API REST
-import { Camera, CameraResultType } from '@capacitor/camera';  // Cámara de Capacitor
-import { HelperService } from 'src/app/services/helper.service';  // Servicio de ayuda para alertas y loaders
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UsuarioService } from 'src/app/services/user/usuario.service';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -59,10 +60,22 @@ export class SignUpPage implements OnInit {
             p_nombre: this.form.value.name,
             p_telefono: this.form.value.phone,
             token: this.token
-          }, this.imagen).toPromise();  // Asegúrate de convertir la Observable a Promise
+          }, this.imagen).toPromise();
 
-          // Ajustar la lógica según la estructura de la respuesta
+          // Si el usuario fue agregado correctamente en la API
           if (req && req.message === 'Usuario agregado correctamente!') {
+
+            // Guardamos los datos del usuario en Preferences
+            await Preferences.set({
+              key: 'user',
+              value: JSON.stringify({
+                name: this.form.value.name,
+                email: this.form.value.email,
+                phone: this.form.value.phone,
+                image: this.imagen ? this.imagen.src : null 
+              })
+            });
+
             const jsonToken = [
               {
                 "token": this.token,
