@@ -15,12 +15,12 @@ export class AddTripPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private animationCtrl: AnimationController  // Inyectamos el controlador de animaciones
+    private animationCtrl: AnimationController // Inyectamos el controlador de animaciones
   ) {
     // Simulación de carga
     setTimeout(() => {
       this.loading = false;  // Cambia el estado de loading después de 3 segundos
-    }, 3000);
+    }, 1000);
   }
 
   // Animación para la apertura del modal (deslizar desde abajo)

@@ -16,7 +16,7 @@ export class ViajeService {
       const params = {
         token:parToken
       };
-      const response = await lastValueFrom(this.http.get<any>(environment.apiUrl + 'viaje/obtener',{params}));
+      const response = await lastValueFrom(this.http.get<any>(environment.apiUrl + '/viaje/obtener',{params}));
       return response;
     } catch (error) {
       throw error;

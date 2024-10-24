@@ -20,7 +20,6 @@ export class SignUpPage implements OnInit {
     phone: new FormControl('', [Validators.required, Validators.minLength(9)]),
     password: new FormControl('', [Validators.required]),
   });
-  
 
   imagen: any;
   token: string = '';
@@ -34,8 +33,7 @@ export class SignUpPage implements OnInit {
     private storage: StorageService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   async submit() {
     if (this.isSubmitting) {
@@ -61,9 +59,10 @@ export class SignUpPage implements OnInit {
             p_nombre: this.form.value.name,
             p_telefono: this.form.value.phone,
             token: this.token
-          }, this.imagen);
+          }, this.imagen).toPromise();  // Asegúrate de convertir la Observable a Promise
 
-          if (req && req.data && req.message === 'Usuario agregado correctamente!') {
+          // Ajustar la lógica según la estructura de la respuesta
+          if (req && req.message === 'Usuario agregado correctamente!') {
             const jsonToken = [
               {
                 "token": this.token,
