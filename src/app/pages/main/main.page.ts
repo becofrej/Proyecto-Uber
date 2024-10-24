@@ -2,6 +2,7 @@ import { Preferences } from '@capacitor/preferences';
 import { getAuth, signOut } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-main',
@@ -10,13 +11,14 @@ import { Component, inject, OnInit } from '@angular/core';
 })
 export class MainPage implements OnInit {
   
+  userId: string | null = null;
+
   pages = [
     { title: 'Menú', url: '/main/home', icon: 'home-outline'},
     { title: 'Perfil', url: '/main/profile', icon: 'person-outline'},
     { title: 'Vehículos', url: '/main/car', icon: 'car-sport-outline'},
     { title: 'Viajes', url: '/main/trip', icon: 'airplane-outline'},
     { title: 'Configuración', url: '#', icon: 'settings-outline'},
-
   ]
 
   router = inject(Router);

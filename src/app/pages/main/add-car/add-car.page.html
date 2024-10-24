@@ -96,40 +96,72 @@
     </div>
   </ion-list>
 
-  <!-- Formulario de Registro de Vehículo -->
-  <form *ngIf="!loading">
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Marca</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+  <!-- Formulario de Registro de Vehículo (se muestra solo si loading es false) -->
+  <div class="vehicle-registration-form" *ngIf="!loading">
+    <form [formGroup]="form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+      <!-- Input de patente -->
+      <app-custom-input 
+      icon="car-outline"
+      [control]="form.controls.patente"
+      type="text"
+      label="Patente"
+      ></app-custom-input>
 
-      <ion-item>
-        <ion-label position="floating">Modelo</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+      <!-- Input de marca -->
+      <app-custom-input 
+      icon="car-outline"
+      [control]="form.controls.marca"
+      type="text"
+      label="Marca"
+      ></app-custom-input>
 
-      <ion-item>
-        <ion-label position="floating">Año</ion-label>
-        <ion-input type="number"></ion-input>
-      </ion-item>
+      <!-- Input de modelo -->
+      <app-custom-input 
+      icon="build-outline"
+      [control]="form.controls.modelo"
+      type="text"
+      label="Modelo"
+      ></app-custom-input>
 
-      <ion-item>
-        <ion-label position="floating">Número de Placa</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+      <!-- Input de año -->
+      <app-custom-input 
+      icon="calendar-outline"
+      [control]="form.controls.anio"
+      type="number"
+      label="Año"
+      ></app-custom-input>
 
-      <ion-item>
-        <ion-label position="floating">Color</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+      <!-- Input de color -->
+      <app-custom-input 
+      icon="color-palette-outline"
+      [control]="form.controls.color"
+      type="text"
+      label="Color"
+      ></app-custom-input>
 
-      <ion-item>
-        <ion-label position="floating">Kilometraje</ion-label>
-        <ion-input type="number"></ion-input>
-      </ion-item>
+      <!-- Input de tipo de combustible -->
+      <app-custom-input 
+      icon="flame-outline"
+      [control]="form.controls.tipo_combustible"
+      type="text"
+      label="Tipo de Combustible"
+      ></app-custom-input>
 
-      <ion-button expand="block" type="submit">Registrar Vehículo</ion-button>
-    </ion-list>
-  </form>
+      <!-- Botón para capturar foto del vehículo -->
+      <ion-button (click)="takePhoto()" fill="outline">
+        <ion-icon name="camera-outline"></ion-icon>
+        Capturar Foto
+      </ion-button>
+
+      <!-- Botón para enviar el formulario -->
+      <ion-button expand="block" fill="solid" type="submit">
+        Registrar Vehículo
+      </ion-button>
+
+      <!-- Vista previa de la imagen -->
+      <img *ngIf="imagen" [src]="imagen.src" alt="Vista previa del vehículo" height="100" width="100">
+
+    </form>
+  </div>
+
 </ion-content>

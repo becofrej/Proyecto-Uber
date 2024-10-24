@@ -1,4 +1,10 @@
-.full-width {
-    width: 100%;
-  }
-  
+.modal-wrapper {
+  border-radius: 15px;
+  background-color: #ffffff;
+}
+
+ion-button {
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
