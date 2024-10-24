@@ -29,7 +29,7 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 - Login y LogOut ✅
 - ResetPassword ✅
 - Registro ✅
-### 2. Persistencia de datos (Plugin capacitor Preferences) ⚠️
+### 2. Persistencia de datos (Plugin capacitor Preferences) ✅
 - Agregar Datos 
 - Obtener Datos 
 ### 3. Consumo de apiRest ⚠️
