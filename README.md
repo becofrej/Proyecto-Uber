@@ -50,6 +50,14 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 decir, se debe animar desde una interacción con el usuario. 
 
 ---
+### PLugins escogidos e implementados:
+1. Geolocalización
+2. Cámara
+
+### Animación implementada:
+- Overriding Ionic Component Animations (Modals)
+
+---
 
 ### API del docente:
 https://uber-nodejs-server-git-d61f89-guillermovillacuratorres-projects.vercel.app/api/
