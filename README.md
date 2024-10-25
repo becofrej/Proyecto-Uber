@@ -29,7 +29,7 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 - Login y LogOut ✅
 - ResetPassword ✅
 - Registro ✅
-### 2. Persistencia de datos (Plugin capacitor Preferences) ⚠️
+### 2. Persistencia de datos (Plugin capacitor Preferences) ✅
 - Agregar Datos 
 - Obtener Datos 
 ### 3. Consumo de apiRest ⚠️
@@ -48,6 +48,14 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 ### 6. Animación nativa de ionic (Animations). (Animación del Modal) ✅
 - No debe iniciar la reproducción de la animación desde un botón que diga explícitamente “PLAY”, es 
 decir, se debe animar desde una interacción con el usuario. 
+
+---
+### PLugins escogidos e implementados:
+1. Geolocalización
+2. Cámara
+
+### Animación implementada:
+- Overriding Ionic Component Animations (Modals)
 
 ---
 
