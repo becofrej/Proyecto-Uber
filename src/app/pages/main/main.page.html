@@ -2,8 +2,9 @@
   <app-header title="Menú"></app-header>
 
   <ion-content class="ion-text-center">
-    <img src="assets/icon/Perfil.png" class="avatar-icon" alt="Avatar" />
-    <h5>Hola, Juanito</h5>
+    <img [src]="userImage" class="avatar-icon" alt="Avatar" />
+    <!-- Mostrar el nombre real del usuario desde userName -->
+    <h5>Hola, {{ userName }}</h5>
 
     <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
       <ion-item

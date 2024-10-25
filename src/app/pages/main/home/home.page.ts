@@ -14,14 +14,7 @@ export class HomePage implements OnInit {
 
   constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute) { }
 
-  userEmail: string;
-
   ngOnInit() {
-    
-    this.route.queryParams.subscribe(params => {
-      this.userEmail = params['email'];
-      console.log('Correo del usuario: ', this.userEmail)
-    })
 
     // Establecemos una URL predeterminada para el mapa
     this.currentLocation = this.sanitizer.bypassSecurityTrustResourceUrl(

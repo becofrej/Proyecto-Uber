@@ -2,22 +2,21 @@
 
 <ion-content class="ion-padding-top ion-text-center">
   <ion-avatar>
-    <img alt="Avatar" src="assets/icon/Perfil.png" />
+    <img alt="Avatar" [src]="userImage" />
   </ion-avatar>
 
   <ion-button class="photo-button" mode="ios" size="small" shape="round">
     <ion-icon name="camera-outline"></ion-icon>
   </ion-button>
 
-  <h3>Juanito Rodriguez</h3>
+  <h3>{{ userName }}</h3>  <!-- Muestra el nombre real del usuario -->
   <div>
-    Fecha de nacimiento: 19/03/1994
+    Correo: {{ userEmail }} <!-- Muestra el correo real del usuario -->
     <br/>
-    Teléfono: +56 9 6717 0812
+    Teléfono: {{ userPhone }} <!-- Muestra el teléfono real del usuario -->
     <br/>
     Conductor
     <br/>
-    Clasificación: 4.2
+    Clasificación: 4.2 <!-- Este dato se mantiene falso -->
   </div>
 </ion-content>
-
