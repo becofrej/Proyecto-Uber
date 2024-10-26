@@ -32,20 +32,20 @@ export class VehiculoService {
   }
 
   // Servicio para obtener un vehículo específico
-  obtenerVehiculo(idVehiculo: number, token: string): Observable<VehiculoResponse> {
+  obtenerVehiculo(idVehiculo: number, token: string): Observable<EndPointVehiculo> {
     const params = new HttpParams()
       .set('id_vehiculo', idVehiculo.toString())
       .set('token', token);
 
-    return this.http.get<VehiculoResponse>(`${this.apiUrl}/obtener`, { params });
+    return this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params });
   }
 
   // Servicio para obtener todos los vehículos asociados a un usuario
-  async obtenerVehiculosPorUsuario(token: string): Promise<VehiculoResponse> {
+  async obtenerVehiculosPorUsuario(token: string): Promise<EndPointVehiculo> {
     try {
       const params = new HttpParams().set('token', token);
       const response = await lastValueFrom(
-        this.http.get<VehiculoResponse>(`${this.apiUrl}/obtener`, { params })
+        this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params })
       );
       return response;
     } catch (error) {
@@ -54,8 +54,8 @@ export class VehiculoService {
   }
 }
 
-// Definición de la interfaz para la respuesta del endpoint de obtener vehículos
-interface VehiculoResponse {
+
+interface EndPointVehiculo {
   message: string;
   data: {
     id_vehiculo: number;
