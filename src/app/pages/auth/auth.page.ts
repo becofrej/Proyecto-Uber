@@ -77,8 +77,12 @@ export class AuthPage implements OnInit {
             // Guardar el userId en el almacenamiento local (puede ser útil para otras páginas)
             await this.storage.setUserId(userId);
 
-            // Navegar a la página principal pasando el userId como parámetro de la URL
-            this.goToHome(userId);
+            // Guardar el correo en el almacenamiento local
+            const userCorreo = this.usuario[0].correo_electronico;
+            await this.storage.setItem('userEmail', userCorreo);
+
+            // Navegar a la página principal pasando el correo como parámetro de la URL
+            this.goToHome(userCorreo);
 
             // Mostrar mensaje de éxito
             await this.helper.showAlert("Inicio de sesión exitoso", "Bienvenido");
@@ -112,9 +116,9 @@ export class AuthPage implements OnInit {
     }
   }
 
-  // Redirigir a la vista de Home
-  goToHome(userId: string) {
-    this.router.navigate(['/main/home'], { queryParams: { userId: userId } });
+  // Redirigir a la vista de Home con el correo en la URL
+  goToHome(userEmail: string) {
+    this.router.navigate(['/main/home'], { queryParams: { userEmail: userEmail } });
   }
 
   // Redirigir a la vista de registro
