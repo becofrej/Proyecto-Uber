@@ -44,7 +44,7 @@ export class AddTripPage implements OnInit, AfterViewInit {
       { nombre: 'DUOC: San Joaquin' },
       { nombre: 'Casa' },
       { nombre: 'Mall Costanera Center' },
-      // Añade más ubicaciones según tus necesidades
+      { nombre: 'Movistar Arena'}
     ];
   }
 
@@ -61,6 +61,7 @@ export class AddTripPage implements OnInit, AfterViewInit {
     try {
       const response = await this.viajeService.agregarViaje(viajeData);
       console.log("Viaje registrado correctamente:", response);
+      console.log("Datos del viaje enviados:", JSON.stringify(viajeData));
     } catch (error) {
       console.error("Error al registrar el viaje:", error);
     }

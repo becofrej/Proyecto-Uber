@@ -48,6 +48,7 @@ export class AddCarPage implements OnInit {
           async (req) => {
             console.log('Vehículo registrado:', req);
             await this.helper.showAlert("Vehículo registrado correctamente.", "Información");
+            console.log("Datos del vehículo enviados:", JSON.stringify(formData));
             this.router.navigate(['/main/car']);
           },
           async () => await this.helper.showAlert("Error al registrar el vehículo.", "Error")

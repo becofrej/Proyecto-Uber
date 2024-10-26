@@ -54,13 +54,14 @@ export class AuthPage implements OnInit {
       }
     }
   }
-
+  
   async firebaseLogin() {
     const reqFirebase = await this.firebase.login(this.form.value.email, this.form.value.password);
     const token = await reqFirebase.user?.getIdToken();
     if (token) {
       this.token = token;
       await this.storage.setItem('token', this.token);
+      console.log("Token de autenticación:", this.token);
       return reqFirebase;
     }
     return null;
@@ -75,6 +76,7 @@ export class AuthPage implements OnInit {
       const usuario = req.data[0];
       this.usuarioCompleto = usuario;
       await this.storage.setItem('usuarioCompleto', JSON.stringify(usuario));
+      console.log("Datos completos del usuario:", JSON.stringify(this.usuarioCompleto));
       return usuario;
     } else {
       console.error('No se encontraron los datos del usuario.');

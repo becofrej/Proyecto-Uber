@@ -7,12 +7,30 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-list>
-    <ion-item [button]="true" *ngFor="let item of items; let index = index">
-      <ion-avatar slot="start">
-        <img src="assets/img/Car-example.png" alt="car avatar" />
-      </ion-avatar>
-      <ion-label>{{ item }}</ion-label>
-    </ion-item>
-  </ion-list>
+  <ng-container *ngIf="vehiculos.length > 0; else noVehiculos">
+    <ion-list>
+      <ion-item *ngFor="let vehiculo of vehiculos">
+        <ion-avatar slot="start">
+          <img 
+            *ngIf="vehiculo.imagen_vehiculo; else defaultImage" 
+            [src]="vehiculo.imagen_vehiculo" 
+            alt="Imagen del vehículo" 
+          />
+          <ng-template #defaultImage>
+            <img src="assets/img/Car-example.png" alt="car avatar" />
+          </ng-template>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ vehiculo.marca }} {{ vehiculo.modelo }}</h2>
+          <p>Patente: {{ vehiculo.patente }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+  <ng-template #noVehiculos>
+    <ion-text color="medium">
+      <p>No tienes vehículos registrados.</p>
+    </ion-text>
+  </ng-template>
 </ion-content>
