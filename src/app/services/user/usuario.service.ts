@@ -25,13 +25,13 @@ export class UsuarioService {
     return this.http.post<any>(`${environment.apiUrl}/user/agregar`, formData);
   }
 
-  obtenerUsuario(data: dataGetUser): Observable<any> {
+  obtenerUsuario(data: dataGetUser): Observable<{ message: string, data: UsuarioResponse[] }> {
     const params = {
       p_correo: data.p_correo,
       token: data.token
     };
 
-    return this.http.get<any>(`${environment.apiUrl}/user/obtener`, { params });
+    return this.http.get<{ message: string, data: UsuarioResponse[] }>(`${environment.apiUrl}/user/obtener`, { params });
   }
 }
 
@@ -45,4 +45,13 @@ interface dataBodyUsuario {
 interface dataGetUser {
   p_correo: string;
   token: string;
+}
+
+interface UsuarioResponse {
+  id_usuario: number;
+  nombre: string;
+  correo_electronico: string;
+  telefono: string;
+  nombre_proyecto: string;
+  imagen_usuario: string;
 }

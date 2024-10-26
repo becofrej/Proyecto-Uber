@@ -11,17 +11,24 @@ export class ViajeService {
   constructor(private http:HttpClient) { }
 
 
-  async obtenerViaje(parToken:string){
+  async agregarViaje(data: bodyViaje) {
     try {
-      const params = {
-        token:parToken
-      };
-      const response = await lastValueFrom(this.http.get<any>(environment.apiUrl + '/viaje/obtener',{params}));
+      const response = await lastValueFrom(
+        this.http.post<any>(`${environment.apiUrl}/viaje/agregar`, data)
+      );
       return response;
     } catch (error) {
       throw error;
     }
   }
+}
 
-
+// Definición de la interfaz bodyViaje para el método agregarViaje
+interface bodyViaje {
+  p_id_usuario: number;
+  p_ubicacion_origen: string;
+  p_ubicacion_destino: string;
+  p_costo: number;
+  p_id_vehiculo: number;
+  token: string;
 }
