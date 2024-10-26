@@ -6,15 +6,29 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-list>
-    <ion-item [button]="true" *ngFor="let item of items; let index">
+
+  <ion-list *ngIf="viajes.length > 0; else noViajesMessage">
+    <ion-item *ngFor="let viaje of viajes">
       <ion-avatar slot="start">
         <img
-          [src]="'https://picsum.photos/80/80?random=' + index"
-          alt="avatar"
+          [src]="viaje.imagen_vehiculo || 'assets/img/default-car.png'"
+          alt="Imagen del vehículo"
         />
       </ion-avatar>
-      <ion-label>{{ item }}</ion-label>
+      <ion-label>
+        Origen: {{ viaje.ubicacion_origen }} <br>
+        Destino: {{ viaje.ubicacion_destino }} <br>
+        Fecha: {{ viaje.fecha | date:'short' }} <br>
+        Costo: ${{ viaje.costo }} <br>
+        Patente Vehículo: {{ viaje.patente }}
+      </ion-label>
     </ion-item>
   </ion-list>
+
+  <!-- Mostrar mensaje cuando no hay viajes -->
+  <ng-template #noViajesMessage>
+    <ion-item lines="none">
+      <ion-label text-center>No tienes viajes registrados</ion-label>
+    </ion-item>
+  </ng-template>
 </ion-content>
