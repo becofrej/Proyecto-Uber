@@ -6,7 +6,7 @@ import { UserModel } from 'src/app/models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs'; // Importar para usar firstValueFrom
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +14,6 @@ import { firstValueFrom } from 'rxjs'; // Importar para usar firstValueFrom
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-
   token: string = '';  // Almacenar el token de Firebase
   usuario: UserModel[] = [];   // Datos del usuario desde la API
 
@@ -28,59 +27,41 @@ export class AuthPage implements OnInit {
     private firebase: FirebaseService,  
     private helper: HelperService,     
     private storage: StorageService,
-    private usuarioService: UsuarioService  // Servicio de la API REST
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {}
 
   // Función para manejar el login
   async login() {
-    this.form.markAllAsTouched();  // Marcar todos los campos como tocados para validar
+    this.form.markAllAsTouched();
 
     if (this.form.valid) {
       const loader = await this.helper.showLoader("Cargando...");
 
       try {
-        // Realizar el login con Firebase
         const reqFirebase = await this.firebase.login(this.form.value.email, this.form.value.password);
         const token = await reqFirebase.user?.getIdToken();
 
         if (token) {
           this.token = token;
-
-          // Guardar el token en el almacenamiento local
           await this.storage.setItem('token', this.token);
-          console.log('Token almacenado:', this.token);
 
-          // Realizar la solicitud para obtener el usuario desde la API REST usando el token
           const req: any = await firstValueFrom(this.usuarioService.obtenerUsuario({
             p_correo: this.form.value.email,
             token: this.token
           }));
 
-          if (req && req.data) { // Verificar si 'data' existe
-            this.usuario = req.data;  // Almacenar los datos del usuario
-            const userId = this.usuario[0].id_usuario.toString(); // Convertir a string si es necesario
-            console.log("Datos del usuario", userId);
+          if (req && req.data) {
+            this.usuario = req.data;
+            const userCorreo = this.usuario[0].correo_electronico;
 
-            // Guardar el token y los datos del usuario en el almacenamiento local
-            const jsonToken = [
-              {
-                "token": this.token,
-                "usuario_id": userId,
-                "usuario_correo": this.usuario[0].correo_electronico
-              }
-            ];
+            // Guardar el correo en el almacenamiento local
+            await this.storage.setItem('userEmail', userCorreo);
 
-            await this.storage.agregarToken(jsonToken);  // Guardar el token y usuario
+            // Navegar a la página principal pasando el correo como parámetro de la URL
+            this.goToHome(userCorreo);
 
-            // Guardar el userId en el almacenamiento local (puede ser útil para otras páginas)
-            await this.storage.setUserId(userId);
-
-            // Navegar a la página principal pasando el userId como parámetro de la URL
-            this.goToHome(userId);
-
-            // Mostrar mensaje de éxito
             await this.helper.showAlert("Inicio de sesión exitoso", "Bienvenido");
           } else {
             console.error('No se encontraron los datos del usuario.');
@@ -112,11 +93,11 @@ export class AuthPage implements OnInit {
     }
   }
 
-  // Redirigir a la vista de Home
-  goToHome(userId: string) {
-    this.router.navigate(['/main/home'], { queryParams: { userId: userId } });
+  // Redirigir a la vista de Home con el correo en la URL
+  goToHome(userEmail: string) {
+    this.router.navigate(['/main/home'], { queryParams: { userEmail: userEmail } });
   }
-
+  
   // Redirigir a la vista de registro
   goRegister() {
     this.router.navigate(['/auth/register']);
