@@ -51,11 +51,12 @@ decir, se debe animar desde una interacción con el usuario.
 
 ---
 ### PLugins escogidos e implementados:
-1. Geolocalización
-2. Cámara
+1. Geolocalización (En la vista Home)
+2. Cámara (En el registro de usuario)
 
 ### Animación implementada:
-- Overriding Ionic Component Animations (Modals)
+- Overriding Ionic Component Animations (Modal en add-trip.page.html)
+- Desplazamiento horizontal de un elemento de manera indefinida (panel publicitario en add-trip.page.html)
 
 ---
 
