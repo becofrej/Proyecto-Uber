@@ -1,10 +1,126 @@
-.modal-wrapper {
-  border-radius: 15px;
-  background-color: #ffffff;
+// Paleta y sombras
+$primary-color: #4a90e2;
+$background-color: #f7f9fc;
+$input-background: #ffffff;
+$label-color: #4a4a4a;
+$button-color: #007aff;
+$border-color: #e5e7eb;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$hover-shadow-color: rgba(0, 0, 0, 0.15);
+
+// Fondo general
+ion-content {
+  background-color: $background-color;
 }
 
-ion-button {
-  --border-radius: 12px;
-  --padding-start: 12px;
-  --padding-end: 12px;
+// Contenedor del formulario
+.form-container {
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px $shadow-color;
+  background-color: $input-background;
+}
+
+// Campo del formulario
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+
+  ion-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: $label-color;
+    margin-bottom: 0.5rem;
+  }
+
+  ion-input {
+    background-color: $input-background;
+    border-radius: 8px;
+    padding: 0.6rem;
+    border: 1px solid $border-color;
+    box-shadow: 0px 2px 4px $shadow-color;
+  }
+
+  // Botón de seleccionar vehículo
+  ion-button[id="modal-trigger"] {
+    background-color: lighten($button-color, 10%);
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.8rem;
+    box-shadow: 0px 3px 8px $shadow-color;
+  }
+}
+
+// Botón de registrar viaje
+ion-button[type="submit"] {
+  background-color: $button-color;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px $shadow-color;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+// Estilos del modal
+ion-modal {
+  .modal-wrapper {
+    border-radius: 10px;
+    padding: 1.2rem;
+  }
+
+  ion-header {
+    ion-toolbar {
+      --background: $primary-color;
+      z-index: 10;  // Aseguramos que la barra de herramientas esté por encima
+
+      ion-title {
+        font-weight: bold;
+        color: white;
+      }
+
+      ion-buttons {
+        z-index: 11;  // Aseguramos que el botón esté por encima de todo
+      }
+
+      ion-button {
+        background-color: darken($primary-color, 10%);
+        color: white;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        opacity: 1;  // Aseguramos que la opacidad sea completa
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);  // Sombra clara para resaltar el botón
+
+        &:hover {
+          opacity: 1;
+          background-color: lighten($primary-color, 5%);
+        }
+      }
+    }
+  }
+}
+
+// Panel publicitario
+.advert-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $primary-color;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.scrolling-text {
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 1rem;
 }
