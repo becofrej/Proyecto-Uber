@@ -31,4 +31,18 @@
       <ion-label text-center>No tienes viajes registrados</ion-label>
     </ion-item>
   </ng-template>
+
+  <ion-item>
+    <ion-label position="stacked">Nuevo Estado</ion-label>
+    <ion-input type="number" [(ngModel)]="nuevoEstado" placeholder="Ingresa el nuevo estado"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="stacked">ID del Viaje</ion-label>
+    <ion-input type="number" [(ngModel)]="viajeId" placeholder="Ingresa el ID del viaje"></ion-input>
+  </ion-item>
+  
+  <ion-button expand="block" (click)="actualizarEstadoViaje()">
+    Actualizar Estado del Viaje
+  </ion-button>
 </ion-content>
