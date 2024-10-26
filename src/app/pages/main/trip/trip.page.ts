@@ -12,6 +12,8 @@ export class TripPage implements OnInit {
   viajes: any[] = [];
   userId: number;
   token: string;
+  nuevoEstado: number;
+  viajeId: number;
 
   constructor(
     private router: Router,
@@ -49,5 +51,17 @@ export class TripPage implements OnInit {
 
   goAddTrip() {
     this.router.navigate(['/main/add-trip']);
+  }
+
+  // Método para actualizar el estado del viaje
+  async actualizarEstadoViaje() {
+    try {
+      const token = await this.storage.getToken(); // Obtiene el token
+      await this.viajeService.actualizarEstadoViaje(this.nuevoEstado, this.viajeId, token);
+      console.log('Estado del viaje actualizado con éxito');
+      this.obtenerViajes(); // Recargamos los viajes para reflejar los cambios
+    } catch (error) {
+      console.error('Error al actualizar el estado del viaje:', error);
+    }
   }
 }
