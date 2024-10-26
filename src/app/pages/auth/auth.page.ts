@@ -2,11 +2,10 @@ import { StorageService } from 'src/app/services/storage.service';
 import { UsuarioService } from 'src/app/services/user/usuario.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { UserModel } from 'src/app/models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs'; // Importar para usar firstValueFrom
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -14,9 +13,8 @@ import { firstValueFrom } from 'rxjs'; // Importar para usar firstValueFrom
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-
-  token: string = '';  // Almacenar el token de Firebase
-  usuario: UserModel[] = [];   // Datos del usuario desde la API
+  token: string = '';
+  usuarioCompleto: any = {};
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -25,110 +23,80 @@ export class AuthPage implements OnInit {
 
   constructor(
     private router: Router,
-    private firebase: FirebaseService,  
-    private helper: HelperService,     
+    private firebase: FirebaseService,
+    private helper: HelperService,
     private storage: StorageService,
-    private usuarioService: UsuarioService  // Servicio de la API REST
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {}
 
-  // Función para manejar el login
   async login() {
-    this.form.markAllAsTouched();  // Marcar todos los campos como tocados para validar
+    this.form.markAllAsTouched();
 
     if (this.form.valid) {
       const loader = await this.helper.showLoader("Cargando...");
-
       try {
-        // Realizar el login con Firebase
-        const reqFirebase = await this.firebase.login(this.form.value.email, this.form.value.password);
-        const token = await reqFirebase.user?.getIdToken();
-
-        if (token) {
-          this.token = token;
-
-          // Guardar el token en el almacenamiento local
-          await this.storage.setItem('token', this.token);
-          console.log('Token almacenado:', this.token);
-
-          // Realizar la solicitud para obtener el usuario desde la API REST usando el token
-          const req: any = await firstValueFrom(this.usuarioService.obtenerUsuario({
-            p_correo: this.form.value.email,
-            token: this.token
-          }));
-
-          if (req && req.data) { // Verificar si 'data' existe
-            this.usuario = req.data;  // Almacenar los datos del usuario
-            const userId = this.usuario[0].id_usuario.toString(); // Convertir a string si es necesario
-            console.log("Datos del usuario", userId);
-
-            // Guardar el token y los datos del usuario en el almacenamiento local
-            const jsonToken = [
-              {
-                "token": this.token,
-                "usuario_id": userId,
-                "usuario_correo": this.usuario[0].correo_electronico
-              }
-            ];
-
-            await this.storage.agregarToken(jsonToken);  // Guardar el token y usuario
-
-            // Guardar el userId en el almacenamiento local (puede ser útil para otras páginas)
-            await this.storage.setUserId(userId);
-
-            // Guardar el correo en el almacenamiento local
-            const userCorreo = this.usuario[0].correo_electronico;
-            await this.storage.setItem('userEmail', userCorreo);
-
-            // Navegar a la página principal pasando el correo como parámetro de la URL
-            this.goToHome(userCorreo);
-
-            // Mostrar mensaje de éxito
+        const reqFirebase = await this.firebaseLogin();
+        if (reqFirebase && reqFirebase.user) {
+          const usuario = await this.fetchUserFromAPI();
+          if (usuario) {
+            this.goToHome(usuario.correo_electronico);
             await this.helper.showAlert("Inicio de sesión exitoso", "Bienvenido");
-          } else {
-            console.error('No se encontraron los datos del usuario.');
-            await this.helper.showAlert("Error al obtener los datos del usuario.", "Error");
           }
         } else {
-          console.error('No se obtuvo el token.');
           await this.helper.showAlert('Error al obtener el token de autenticación.', 'Error');
         }
-
+      } catch (error) {
+        await this.handleLoginError(error);
+      } finally {
         loader.dismiss();
-
-      } catch (error: any) {
-        loader.dismiss();
-
-        let msg = "Ocurrió un error al iniciar sesión.";
-        if (error.code === "auth/invalid-email") {
-          msg = "Correo no válido.";
-        } else if (error.code === "auth/wrong-password") {
-          msg = "Contraseña incorrecta.";
-        } else if (error.code === "auth/user-not-found") {
-          msg = "El usuario no existe.";
-        }
-
-        await this.helper.showAlert(msg, "Error");
       }
-    } else {
-      console.log('Formulario inválido');
     }
   }
 
-  // Redirigir a la vista de Home con el correo en la URL
-  goToHome(userEmail: string) {
-    this.router.navigate(['/main/home'], { queryParams: { userEmail: userEmail } });
+  async firebaseLogin() {
+    const reqFirebase = await this.firebase.login(this.form.value.email, this.form.value.password);
+    const token = await reqFirebase.user?.getIdToken();
+    if (token) {
+      this.token = token;
+      await this.storage.setItem('token', this.token);
+      return reqFirebase;
+    }
+    return null;
   }
 
-  // Redirigir a la vista de registro
+  async fetchUserFromAPI() {
+    const req = await firstValueFrom(this.usuarioService.obtenerUsuario({
+      p_correo: this.form.value.email,
+      token: this.token
+    }));
+    if (req?.data?.length) {
+      const usuario = req.data[0];
+      this.usuarioCompleto = usuario;
+      await this.storage.setItem('usuarioCompleto', JSON.stringify(usuario));
+      return usuario;
+    } else {
+      console.error('No se encontraron los datos del usuario.');
+      await this.helper.showAlert("Error al obtener los datos del usuario.", "Error");
+    }
+    return null;
+  }
+
+  goToHome(userEmail: string) {
+    this.router.navigate(['/main/home'], { queryParams: { userEmail } });
+  }
+
   goRegister() {
     this.router.navigate(['/auth/register']);
   }
 
-  // Función para mostrar el cargador
-  async showLoader(message: string) {
-    const loader = await this.helper.showLoader(message);
-    return loader;
+  async handleLoginError(error: any) {
+    const messages: { [key: string]: string } = {
+      'auth/invalid-email': "Correo no válido.",
+      'auth/wrong-password': "Contraseña incorrecta.",
+      'auth/user-not-found': "El usuario no existe."
+    };
+    await this.helper.showAlert(messages[error.code] || "Ocurrió un error al iniciar sesión.", "Error");
   }
 }

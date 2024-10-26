@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { AnimationController, IonModal } from '@ionic/angular';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AnimationController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { VehiculoService } from 'src/app/services/vehiculo.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { ViajeService } from 'src/app/services/viaje.service';
 
 @Component({
   selector: 'app-add-trip',
@@ -8,96 +11,73 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-trip.page.scss'],
 })
 export class AddTripPage implements OnInit, AfterViewInit {
-
-  @ViewChild(IonModal) modal: IonModal;
   tripForm: FormGroup;
-  vehiculos = [
-    { id: 1, nombre: 'Vehículo 1' },
-    { id: 2, nombre: 'Vehículo 2' },
-    { id: 3, nombre: 'Vehículo 3' }
-  ];
-  vehiculoSeleccionado: any = null;
+  ubicaciones: { nombre: string }[] = [];
+  idUsuario: number;
+  token: string;
+  vehiculoId: number = 47;
 
   constructor(
     private animationCtrl: AnimationController,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private storage: StorageService,
+    private viajeService: ViajeService
   ) {}
 
-  ngOnInit() {
-    // Inicialización del formulario con validación básica
+  async ngOnInit() {
     this.tripForm = this.fb.group({
       origen: ['', Validators.required],
       destino: ['', Validators.required],
-      costo: ['', [Validators.required, Validators.min(1)]]
+      costo: [10000, Validators.required],
+      vehiculo_id: ['', Validators.required]
     });
+
+    this.token = await this.storage.getItem('token') || '';
+    const usuarioCompleto = await this.storage.getItem('usuarioCompleto');
+    this.idUsuario = usuarioCompleto ? JSON.parse(usuarioCompleto).id_usuario : null;
+
+    this.inicializarUbicaciones();
+  }
+
+  inicializarUbicaciones() {
+    this.ubicaciones = [
+      { nombre: 'DUOC: San Joaquin' },
+      { nombre: 'Casa' },
+      { nombre: 'Mall Costanera Center' },
+      // Añade más ubicaciones según tus necesidades
+    ];
+  }
+
+  async agregarViaje(origen: string, destino: string, vehiculo_id: number) {
+    const viajeData = {
+      p_id_usuario: this.idUsuario,
+      p_ubicacion_origen: origen,
+      p_ubicacion_destino: destino,
+      p_costo: 10000,
+      p_id_vehiculo: vehiculo_id,
+      token: this.token,
+    };
+
+    try {
+      const response = await this.viajeService.agregarViaje(viajeData);
+      console.log("Viaje registrado correctamente:", response);
+    } catch (error) {
+      console.error("Error al registrar el viaje:", error);
+    }
   }
 
   ngAfterViewInit() {
     this.createScrollingTextAnimation();
   }
 
-  // Animaciones reutilizables para el modal
-  enterAnimation = (baseEl: HTMLElement) => {
-    const backdropAnimation = this.animationCtrl
-      .create()
-      .addElement(baseEl.shadowRoot.querySelector('ion-backdrop'))
-      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
-
-    const wrapperAnimation = this.animationCtrl
-      .create()
-      .addElement(baseEl.shadowRoot.querySelector('.modal-wrapper'))
-      .keyframes([
-        { offset: 0, opacity: '0', transform: 'scale(0)' },
-        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
-      ]);
-
-    return this.animationCtrl
-      .create()
-      .addElement(baseEl)
-      .easing('ease-out')
-      .duration(500)
-      .addAnimation([backdropAnimation, wrapperAnimation]);
-  };
-
-  leaveAnimation = (baseEl: HTMLElement) => this.enterAnimation(baseEl).direction('reverse');
-
-  // Abrir modal
-  openModal() {
-    this.modal.present();
-  }
-
-  // Cerrar modal
-  closeModal() {
-    this.modal.dismiss();
-  }
-
-  // Selección de vehículo
-  selectVehiculo(vehiculo: any) {
-    this.vehiculoSeleccionado = vehiculo;
-    this.closeModal();
-  }
-
-  // Registro de viaje
-  onSubmit() {
-    if (this.tripForm.valid) {
-      const viaje = {
-        ...this.tripForm.value,
-        vehiculo: this.vehiculoSeleccionado
-      };
-      console.log('Viaje registrado:', viaje);
-      // Aquí puedes realizar una llamada a la API para guardar el viaje
-    }
-  }
-
-  // Animación para el texto desplazándose en el panel publicitario
   createScrollingTextAnimation() {
     const scrollingText = document.querySelector('#scrolling-text');
     const animation = this.animationCtrl
       .create()
       .addElement(scrollingText)
-      .duration(10000)  // Duración de la animación
-      .iterations(Infinity)  // Repetición infinita
-      .fromTo('transform', 'translateX(100%)', 'translateX(-100%)');  // Movimiento horizontal
+      .duration(10000)
+      .iterations(Infinity)
+      .fromTo('transform', 'translateX(100%)', 'translateX(-100%)');
 
     animation.play();
   }

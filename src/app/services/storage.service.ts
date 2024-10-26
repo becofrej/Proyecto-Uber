@@ -11,7 +11,6 @@ export class StorageService {
 
   constructor() { }
 
-  // Métodos para manejar items en general
   async setItem(llave: string, valor: string) {
     await Preferences.set({ key: llave, value: valor });
   }
@@ -21,31 +20,19 @@ export class StorageService {
     return obj.value;
   }
 
-  // Métodos específicos para manejar el token
-  async agregarToken(dataJson: any) {
-    await this.setItem(llaveUber, JSON.stringify(dataJson));
-  }
-
-  async obtenerStorage() {
-    const storageData = await this.getItem(llaveUber);
-    if (storageData == null) {
-      return [];
-    } else {
-      return JSON.parse(storageData);
-    }
-  }
-
-  // Métodos para manejar el userId en localStorage
-  async setUserId(userId: string) {
-    localStorage.setItem(llaveUsuario, userId);
+  async getToken() {
+    return await this.getItem('token');
   }
 
   async getUserId(): Promise<string | null> {
-    return localStorage.getItem('userId');
+    return localStorage.getItem(llaveUsuario);
+  }
+
+  async setUserId(userId: string) {
+    localStorage.setItem(llaveUsuario, userId);
   }
 
   async removeUserId() {
     localStorage.removeItem(llaveUsuario);
   }
-
 }

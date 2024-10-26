@@ -62,10 +62,7 @@ export class SignUpPage implements OnInit {
             token: this.token
           }, this.imagen).toPromise();
 
-          // Si el usuario fue agregado correctamente en la API
           if (req && req.message === 'Usuario agregado correctamente!') {
-
-            // Guardamos los datos del usuario en Preferences
             await Preferences.set({
               key: 'user',
               value: JSON.stringify({
@@ -76,18 +73,16 @@ export class SignUpPage implements OnInit {
               })
             });
 
-            const jsonToken = [
+            const jsonToken = JSON.stringify([
               {
-                "token": this.token,
-                "usuario_correo": this.form.value.email
+                token: this.token,
+                usuario_correo: this.form.value.email
               }
-            ];
+            ]);
 
-            await this.storage.agregarToken(jsonToken);
+            await this.storage.setItem('userToken', jsonToken);
 
-            const formData = this.form.value;
-            console.log('Datos del usuario en formato JSON:', JSON.stringify(formData));
-
+            console.log('Datos del usuario en formato JSON:', JSON.stringify(this.form.value));
             await this.helper.showAlert("Usuario registrado correctamente.", "Información");
             this.router.navigate(['/auth']);
           } else {
@@ -103,13 +98,9 @@ export class SignUpPage implements OnInit {
       } catch (error: any) {
         console.error('Error durante el registro:', error);
 
-        let msg = "Ocurrió un error durante el registro.";
-        if (error.code === "auth/email-already-in-use") {
-          msg = "El correo ya está registrado.";
-        } else if (error.code === "auth/weak-password") {
-          msg = "La contraseña es muy débil.";
-        }
-
+        const msg = error.code === "auth/email-already-in-use" ? "El correo ya está registrado." :
+                    error.code === "auth/weak-password" ? "La contraseña es muy débil." :
+                    "Ocurrió un error durante el registro.";
         await this.helper.showAlert(msg, "Error");
 
       } finally {
