@@ -12,8 +12,8 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 
 - Incluir datos a la url ✅
 - Crear un elemento Loading al iniciar sesión ✅
-- Validaciones en el inicio de sesión (usuario falso registrado como variable) ✅
-- Mostrar los datos del usuario en la consola en formato JSON (demuestra dominio en la manipulación de datos) ✅
+- Validaciones en el inicio de sesión ✅
+- Mostrar los datos del usuario en la consola en formato JSON (Al regsitrar usuario se muestra en consola) ✅
 - Crear un servicio llamado user o usuario que nos permita agregar usuarios a la api, el servicio contiene un metodo async. ✅
 - Usar capacitor plugins ✅
 
@@ -45,12 +45,12 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 ### 4. Protección de rutas con AuthGuard implementado con firebase. ✅
 - Implementación página error 404. 
 ### 5. Implementación de plugin a elección. ✅
-### 6. Animación nativa de ionic (Animations). (Animación del Modal) ✅
+### 6. Animación nativa de ionic (Animations). ✅
 - No debe iniciar la reproducción de la animación desde un botón que diga explícitamente “PLAY”, es 
 decir, se debe animar desde una interacción con el usuario. 
 
 ---
-### PLugins escogidos e implementados:
+### Plugins escogidos e implementados:
 1. Geolocalización (En la vista Home)
 2. Cámara (En el registro de usuario)
 
