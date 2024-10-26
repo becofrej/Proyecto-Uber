@@ -34,13 +34,13 @@ Proyecto de programación movil llamado "Te Llevo", el cual esta desarrollado co
 - Obtener Datos 
 ### 3. Consumo de apiRest ⚠️
 1. **Métodos GET:** 🛠️
-- Obtener usuario 
-- Obtener vehículo 
-- Obtener viajes 
+- Obtener usuario ✅
+- Obtener vehículo ⚠️
+- Obtener viajes ⚠️
 2. **Métodos POST:** 
 - Agregar usuario ✅
-- Agregar vehículo 
-- Agregar viaje 
+- Agregar vehículo ✅
+- Agregar viaje ✅
 - Actualizar estado viaje 
 ### 4. Protección de rutas con AuthGuard implementado con firebase. ✅
 - Implementación página error 404. 
