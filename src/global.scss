@@ -29,10 +29,6 @@ ion-button {
     text-transform: none;
 }
 
-.submit {
-    margin-top: 40px;
-}
-
 .d-flex-center {
     display: flex;
     justify-content: center;
@@ -45,8 +41,9 @@ ion-button {
     --border-radius: 15px;
     --border-style: solid;
     --border-width: 1px;
-    margin: 20px 0;
-
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
     ion-label {
         position: relative;
         bottom: 2px;
@@ -71,17 +68,16 @@ ion-button {
     padding: 20px;
 }
 
-/* Ocultar la barra de desplazamiento sin bloquear el desplazamiento */
 ion-content::-webkit-scrollbar {
     display: none;
   }
   
   ion-content {
-    --overflow: auto; /* Asegura el desplazamiento en dispositivos con pantalla táctil */
+    --overflow: auto;
   }
   
   .custom-register-button {
-    --background: #28a745;  /* Aquí puedes cambiar a cualquier código de color verde */
+    --background: #28a745;
     --background-activated: #218838;
     --background-focused: #28a745;
     --background-hover: #28a745;

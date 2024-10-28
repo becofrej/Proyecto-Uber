@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ViajeService } from 'src/app/services/viaje.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-trip',
@@ -10,15 +11,18 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class TripPage implements OnInit {
   viajes: any[] = [];
+  filteredViajes: any[] = [];
   userId: number;
   token: string;
   nuevoEstado: number;
   viajeId: number;
+  searchUserId: number | null = null;
 
   constructor(
     private router: Router,
     private viajeService: ViajeService,
-    private storage: StorageService
+    private storage: StorageService,
+    private toastController: ToastController  // Inyectamos ToastController
   ) {}
 
   async ngOnInit() {
@@ -33,13 +37,14 @@ export class TripPage implements OnInit {
   }
 
   obtenerViajes() {
-    if (this.userId && this.token) {
-      this.viajeService.obtenerViajesPorUsuario(this.userId, this.token).subscribe(
+    if (this.token) {
+      this.viajeService.obtenerTodosLosViajes(this.token).subscribe(
         (response) => {
           if (response && response.data) {
             this.viajes = response.data;
+            this.filteredViajes = this.viajes;
           } else {
-            console.log('No se encontraron viajes para el usuario');
+            console.log('No se encontraron viajes');
           }
         },
         (error) => {
@@ -49,19 +54,39 @@ export class TripPage implements OnInit {
     }
   }
 
+  filterTripsByUserId() {
+    if (this.searchUserId) {
+      this.filteredViajes = this.viajes.filter(
+        (viaje) => viaje.id_usuario === this.searchUserId
+      );
+    } else {
+      this.filteredViajes = this.viajes;
+    }
+  }
+
   goAddTrip() {
     this.router.navigate(['/main/add-trip']);
   }
 
-  // Método para actualizar el estado del viaje
   async actualizarEstadoViaje() {
     try {
-      const token = await this.storage.getToken(); // Obtiene el token
+      const token = await this.storage.getToken();
       await this.viajeService.actualizarEstadoViaje(this.nuevoEstado, this.viajeId, token);
       console.log('Estado del viaje actualizado con éxito');
-      this.obtenerViajes(); // Recargamos los viajes para reflejar los cambios
+      this.mostrarMensajeActualizacionExito();  // Mostrar toast de éxito
+      this.obtenerViajes(); // Refrescar la lista de viajes
     } catch (error) {
       console.error('Error al actualizar el estado del viaje:', error);
     }
+  }
+
+  async mostrarMensajeActualizacionExito() {
+    const toast = await this.toastController.create({
+      message: 'Estado del viaje actualizado con éxito',
+      duration: 2000,
+      color: 'success',
+      position: 'bottom'
+    });
+    await toast.present();
   }
 }

@@ -1,48 +1,55 @@
 <app-header [showMenu]="true" title="Viajes"></app-header>
 
 <ion-content fixed-slot-placement="before">
+
+  <ion-item class="search-bar">
+    <ion-label position="floating">Buscar por ID de Usuario</ion-label>
+    <ion-input type="number" [(ngModel)]="searchUserId" (ionInput)="filterTripsByUserId()"></ion-input>
+  </ion-item>
+
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button (click)="goAddTrip()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-list *ngIf="viajes.length > 0; else noViajesMessage">
-    <ion-item *ngFor="let viaje of viajes">
-      <ion-avatar slot="start">
+  <ion-list class="trip-list" *ngIf="filteredViajes.length > 0; else noViajesMessage">
+    <ion-item *ngFor="let viaje of filteredViajes" class="trip-item">
+      <ion-avatar slot="start" class="trip-avatar">
         <img
           [src]="viaje.imagen_vehiculo || 'assets/img/default-car.png'"
           alt="Imagen del vehículo"
         />
       </ion-avatar>
       <ion-label>
-        Origen: {{ viaje.ubicacion_origen }} <br>
-        Destino: {{ viaje.ubicacion_destino }} <br>
-        Fecha: {{ viaje.fecha | date:'short' }} <br>
-        Costo: ${{ viaje.costo }} <br>
-        Patente Vehículo: {{ viaje.patente }}
+        <h6 class="trip-id">ID Usuario: {{ viaje.id_usuario }}</h6>
+        <p class="trip-details">Origen: {{ viaje.ubicacion_origen }}</p>
+        <p class="trip-details">Destino: {{ viaje.ubicacion_destino }}</p>
+        <p class="trip-details">Fecha: {{ viaje.fecha | date:'short' }}</p>
+        <p class="trip-details">Costo: ${{ viaje.costo }}</p>
+        <p class="trip-details">Patente Vehículo: {{ viaje.patente }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
 
-  <!-- Mostrar mensaje cuando no hay viajes -->
+
   <ng-template #noViajesMessage>
-    <ion-item lines="none">
+    <ion-item lines="none" class="no-trips-message">
       <ion-label text-center>No tienes viajes registrados</ion-label>
     </ion-item>
   </ng-template>
 
-  <ion-item>
+  <ion-item class="state-input">
     <ion-label position="stacked">Nuevo Estado</ion-label>
     <ion-input type="number" [(ngModel)]="nuevoEstado" placeholder="Ingresa el nuevo estado"></ion-input>
   </ion-item>
   
-  <ion-item>
+  <ion-item class="trip-id-input">
     <ion-label position="stacked">ID del Viaje</ion-label>
     <ion-input type="number" [(ngModel)]="viajeId" placeholder="Ingresa el ID del viaje"></ion-input>
   </ion-item>
   
-  <ion-button expand="block" (click)="actualizarEstadoViaje()">
+  <ion-button expand="block" (click)="actualizarEstadoViaje()" class="update-button">
     Actualizar Estado del Viaje
   </ion-button>
 </ion-content>

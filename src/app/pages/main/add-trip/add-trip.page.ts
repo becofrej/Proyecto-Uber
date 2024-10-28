@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { AnimationController } from '@ionic/angular';
+import { AnimationController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VehiculoService } from 'src/app/services/vehiculo.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -21,7 +21,8 @@ export class AddTripPage implements OnInit, AfterViewInit {
     private animationCtrl: AnimationController,
     private fb: FormBuilder,
     private storage: StorageService,
-    private viajeService: ViajeService
+    private viajeService: ViajeService,
+    private toastController: ToastController  // Inyectamos ToastController
   ) {}
 
   async ngOnInit() {
@@ -44,7 +45,7 @@ export class AddTripPage implements OnInit, AfterViewInit {
       { nombre: 'DUOC: San Joaquin' },
       { nombre: 'Casa' },
       { nombre: 'Mall Costanera Center' },
-      { nombre: 'Movistar Arena'}
+      { nombre: 'Movistar Arena' }
     ];
   }
 
@@ -62,9 +63,20 @@ export class AddTripPage implements OnInit, AfterViewInit {
       const response = await this.viajeService.agregarViaje(viajeData);
       console.log("Viaje registrado correctamente:", response);
       console.log("Datos del viaje enviados:", JSON.stringify(viajeData));
+      this.mostrarMensajeExito();  // Mostrar toast de éxito
     } catch (error) {
       console.error("Error al registrar el viaje:", error);
     }
+  }
+
+  async mostrarMensajeExito() {
+    const toast = await this.toastController.create({
+      message: 'Viaje registrado correctamente',
+      duration: 2000,
+      color: 'success',
+      position: 'bottom'
+    });
+    await toast.present();
   }
 
   ngAfterViewInit() {

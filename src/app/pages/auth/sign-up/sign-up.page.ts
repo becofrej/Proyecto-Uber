@@ -34,7 +34,9 @@ export class SignUpPage implements OnInit {
     private storage: StorageService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    
+  }
 
   async submit() {
     if (this.isSubmitting) {

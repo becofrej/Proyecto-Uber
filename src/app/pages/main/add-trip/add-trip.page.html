@@ -1,7 +1,7 @@
 <app-header backButton="/main/trip" title="Registrar Nuevo Viaje"></app-header>
 
-<ion-content class="ion-padding">
-  <form [formGroup]="tripForm" class="form-container">
+<ion-content class="ion-padding addtrip-content">
+  <form [formGroup]="tripForm" class="form-container addtrip-container">
     <ion-list>
       <!-- Dropdown para seleccionar la ubicación de origen -->
       <ion-item lines="none" class="form-field">
@@ -40,7 +40,8 @@
         expand="block" 
         color="primary" 
         (click)="agregarViaje(tripForm.value.origen, tripForm.value.destino, tripForm.value.vehiculo_id)" 
-        [disabled]="tripForm.invalid">
+        [disabled]="tripForm.invalid" 
+        class="submit-button">
         Registrar Viaje
       </ion-button>
     </ion-list>

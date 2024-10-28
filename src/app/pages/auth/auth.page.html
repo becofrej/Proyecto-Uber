@@ -1,7 +1,7 @@
 <app-header title="Inicio de sesión"></app-header>
-<ion-content>
+<ion-content class="auth-content">
 
-  <div class="password-flex-center">
+  <div class="auth-container ">
 
     <!-- Formulario de inicio de sesión -->
     <form [formGroup]="form" class="auth-form" (ngSubmit)="login()" (keypress.enter)="login()">
@@ -15,6 +15,8 @@
       [control]="form.controls.email"
       type="email"
       label="Correo"
+      class="custom-input"
+
       ></app-custom-input>
       
       <!-- Validaciones de campo en input email -->
@@ -29,6 +31,7 @@
       icon="lock-closed-outline"
       type="password"
       label="Contraseña"
+      class="custom-input"
       ></app-custom-input>
 
       <!-- Validaciones de campo en input password -->
@@ -36,10 +39,10 @@
         <div *ngIf="form.controls.password.errors?.['required']">La contraseña es requerida</div>
       </div>
       
-      <p routerLink="forgot-password" class="ion-text-end">¿Olvidaste tu contraseña?</p>
-
+      <p routerLink="forgot-password" class="ion-text-end forgot-password-link">¿Olvidaste tu contraseña?</p>
+<br>
       <!-- Botón de ingresar -->
-      <ion-button expand="block" mode="android" class="submit" type="submit" [disabled]="form.invalid"> <!-- Deshabilitado si el formulario es inválido -->
+      <ion-button  expand="block" mode="android" class="submit-button" type="submit" [disabled]="form.invalid">
         Ingresar
         <ion-icon slot="end" name="log-in-outline"></ion-icon>
       </ion-button>
