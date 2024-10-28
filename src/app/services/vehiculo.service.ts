@@ -7,15 +7,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class VehiculoService {
-
-  private apiUrl = `${environment.apiUrl}/vehiculo`;  // Uso correcto del template literal
+  private apiUrl = `${environment.apiUrl}/vehiculo`;
 
   constructor(private http: HttpClient) { }
 
-  // Servicio para agregar un vehículo
   agregarVehiculo(data: any, imageFile: any): Observable<any> {
     const formData = new FormData();
-    formData.append('p_id_usuario', data.p_id_usuario);  // Enviar el userId
+    formData.append('p_id_usuario', data.p_id_usuario);
     formData.append('p_patente', data.p_patente);
     formData.append('p_marca', data.p_marca);
     formData.append('p_modelo', data.p_modelo);
@@ -25,27 +23,25 @@ export class VehiculoService {
     formData.append('token', data.token);
 
     if (imageFile) {
-      formData.append('image', imageFile.file, imageFile.fname);  // Enviar la imagen si está disponible
+      formData.append('image', imageFile.file, imageFile.fname);
     }
 
-    return this.http.post<any>(`${this.apiUrl}/agregar`, formData);  // Uso correcto del template literal
+    return this.http.post<any>(`${this.apiUrl}/agregar`, formData);
   }
 
-  // Servicio para obtener un vehículo específico
   obtenerVehiculo(idVehiculo: number, token: string): Observable<EndPointVehiculo> {
     const params = new HttpParams()
       .set('id_vehiculo', idVehiculo.toString())
       .set('token', token);
 
-    return this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params });  // Uso correcto del template literal
+    return this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params });
   }
 
-  // Servicio para obtener todos los vehículos asociados a un usuario
-  async obtenerVehiculosPorUsuario(token: string): Promise<EndPointVehiculo> {
+   async obtenerTodosLosVehiculos(token: string): Promise<EndPointVehiculo> {
     try {
       const params = new HttpParams().set('token', token);
       const response = await lastValueFrom(
-        this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params })  // Uso correcto del template literal
+        this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params })
       );
       return response;
     } catch (error) {

@@ -24,12 +24,11 @@ export class MainPage implements OnInit {
   ];
 
   router = inject(Router);
-  auth = getAuth(); // Inicializar Firebase Authentication
+  auth = getAuth();
   currentPath: string = '';
 
   constructor(private alertController: AlertController) {}
 
-  // Mostrar confirmación de cierre de sesión
   async confirmLogout() {
     const alert = await this.alertController.create({
       header: 'Cerrar sesión',
@@ -54,17 +53,13 @@ export class MainPage implements OnInit {
     await alert.present();
   }
 
-  // Cerrar sesión y redirigir al login
   async goAuth() {
     try {
-      // Limpiar solo los datos de usuario almacenados en Preferences (sin borrar todo)
       await Preferences.remove({ key: 'user' });
   
-      // Cerrar sesión en Firebase
       await signOut(this.auth);
       console.log('Sesión cerrada exitosamente en Firebase');
   
-      // Redirigir al usuario a la página de autenticación
       this.router.navigate(['/auth']);
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
@@ -72,12 +67,11 @@ export class MainPage implements OnInit {
   }
 
   async ngOnInit() {
-    // Recuperar los datos del usuario de Preferences
     const { value } = await Preferences.get({ key: 'user' });
     if (value) {
       const user = JSON.parse(value);
-      this.userName = user.name;  // Actualizamos el nombre del usuario con los datos guardados
-      this.userImage = user.image || this.userImage;  // Actualizar la imagen si está disponible
+      this.userName = user.name;
+      this.userImage = user.image || this.userImage;
     }
 
     this.router.events.subscribe((event: any) => {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UsuarioService } from 'src/app/services/user/usuario.service';
 import { firstValueFrom } from 'rxjs';
-import { StorageService } from './storage.service';  // Asegúrate de incluir StorageService
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class FirebaseService {
   constructor(
     private fire: AngularFireAuth,
     private usuarioService: UsuarioService,
-    private storage: StorageService  // Asegúrate de incluir StorageService aquí también
+    private storage: StorageService
   ) { }
 
   async login(email: string, contrasena: string) {
@@ -27,9 +27,9 @@ export class FirebaseService {
         }));
 
         if (userInfo && userInfo.data && userInfo.data.id_usuario) {
-          // Guarda el userId en localStorage o en StorageService
+
           await this.storage.setUserId(userInfo.data.id_usuario);
-          await this.storage.setItem('token', token);  // Guarda el token también
+          await this.storage.setItem('token', token);
         }
       }
 

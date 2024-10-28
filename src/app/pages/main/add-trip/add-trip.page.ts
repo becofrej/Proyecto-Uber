@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AnimationController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VehiculoService } from 'src/app/services/vehiculo.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ViajeService } from 'src/app/services/viaje.service';
 
@@ -22,7 +21,7 @@ export class AddTripPage implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private storage: StorageService,
     private viajeService: ViajeService,
-    private toastController: ToastController  // Inyectamos ToastController
+    private toastController: ToastController 
   ) {}
 
   async ngOnInit() {
@@ -63,7 +62,7 @@ export class AddTripPage implements OnInit, AfterViewInit {
       const response = await this.viajeService.agregarViaje(viajeData);
       console.log("Viaje registrado correctamente:", response);
       console.log("Datos del viaje enviados:", JSON.stringify(viajeData));
-      this.mostrarMensajeExito();  // Mostrar toast de éxito
+      this.mostrarMensajeExito();
     } catch (error) {
       console.error("Error al registrar el viaje:", error);
     }

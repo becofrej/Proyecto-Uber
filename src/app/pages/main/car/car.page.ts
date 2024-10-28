@@ -9,9 +9,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./car.page.scss'],
 })
 export class CarPage implements OnInit {
-  vehiculos: any[] = []; // Array para almacenar todos los vehículos
-  filteredVehiculos: any[] = []; // Array para almacenar los vehículos filtrados
-  searchUserId: number | null = null; // ID de usuario para buscar
+  vehiculos: any[] = [];
 
   constructor(
     private router: Router,
@@ -23,11 +21,9 @@ export class CarPage implements OnInit {
     const token = await this.storageService.getItem('token');
 
     if (token) {
-      // Llama a obtenerTodosLosVehiculos para obtener todos los vehículos de todos los usuarios
       this.vehiculoService.obtenerTodosLosVehiculos(token).then(
         (response) => {
-          this.vehiculos = response.data;  // Asigna todos los vehículos obtenidos
-          this.filteredVehiculos = this.vehiculos; // Inicialmente muestra todos los vehículos
+          this.vehiculos = response.data;
         },
         (error) => {
           console.error('Error al obtener los vehículos:', error);
@@ -35,17 +31,6 @@ export class CarPage implements OnInit {
       );
     } else {
       console.log('No se encontró el token.');
-    }
-  }
-
-  // Método para filtrar vehículos por ID de usuario
-  filterVehiclesByUserId() {
-    if (this.searchUserId) {
-      this.filteredVehiculos = this.vehiculos.filter(
-        (vehiculo) => vehiculo.id_usuario === this.searchUserId
-      );
-    } else {
-      this.filteredVehiculos = this.vehiculos; // Muestra todos si no hay ID ingresado
     }
   }
 

@@ -96,7 +96,7 @@
     </div>
   </ion-list>
 
-  <!-- Formulario de Registro de Vehículo (se muestra solo si loading es false) -->
+  <!-- Formulario de Registro de Vehículo  -->
   <div class="vehicle-registration-form" *ngIf="!loading">
     <form [formGroup]="form" (ngSubmit)="submit()" (keypress.enter)="submit()">
       <!-- Input de patente -->

@@ -2,22 +2,16 @@
 
 <ion-content fixed-slot-placement="before">
   
-  <!-- Campo de búsqueda para el ID de usuario -->
-  <ion-item class="search-bar">
-    <ion-label position="floating">Buscar por ID de Usuario</ion-label>
-    <ion-input type="number" [(ngModel)]="searchUserId" (ionInput)="filterVehiclesByUserId()"></ion-input>
-  </ion-item>
-
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button (click)="goAddCar()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   
-  <ng-container *ngIf="filteredVehiculos.length > 0; else noVehiculos">
-    <ion-list class="vehicle-list">
-      <ion-item *ngFor="let vehiculo of filteredVehiculos" class="vehicle-item">
-        <ion-avatar slot="start" class="vehicle-avatar">
+  <ng-container *ngIf="vehiculos.length > 0; else noVehiculos">
+    <ion-list>
+      <ion-item *ngFor="let vehiculo of vehiculos">
+        <ion-avatar slot="start">
           <img 
             *ngIf="vehiculo.imagen_vehiculo; else defaultImage" 
             [src]="vehiculo.imagen_vehiculo" 
@@ -28,17 +22,16 @@
           </ng-template>
         </ion-avatar>
         <ion-label>
-          <h2 class="vehicle-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h2>
-          <p class="vehicle-details">Patente: {{ vehiculo.patente }}</p>
-          <p class="vehicle-details">ID Usuario: {{ vehiculo.id_usuario }}</p>
+          <h2>{{ vehiculo.marca }} {{ vehiculo.modelo }}</h2>
+          <p>Patente: {{ vehiculo.patente }}</p>
         </ion-label>
       </ion-item>
     </ion-list>
   </ng-container>
 
   <ng-template #noVehiculos>
-    <ion-text color="medium" class="no-vehicles-message">
-      <p>No hay vehículos registrados.</p>
+    <ion-text color="medium">
+      <p>No tienes vehículos registrados.</p>
     </ion-text>
   </ng-template>
 </ion-content>

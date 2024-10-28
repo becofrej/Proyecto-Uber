@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 
 const llaveUber = "llaveAplicacionUber";
-const llaveUsuario = "userId";  // Llave para almacenar el ID de usuario
+const llaveUsuario = "userId";
 
 @Injectable({
   providedIn: 'root'

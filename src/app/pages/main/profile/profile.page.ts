@@ -16,7 +16,6 @@ export class ProfilePage implements OnInit {
   constructor() { }
 
   async ngOnInit() {
-    // Recuperar los datos del usuario desde Preferences
     const { value } = await Preferences.get({ key: 'user' });
     if (value) {
       const user = JSON.parse(value);

@@ -22,7 +22,7 @@ export class TripPage implements OnInit {
     private router: Router,
     private viajeService: ViajeService,
     private storage: StorageService,
-    private toastController: ToastController  // Inyectamos ToastController
+    private toastController: ToastController
   ) {}
 
   async ngOnInit() {
@@ -73,8 +73,8 @@ export class TripPage implements OnInit {
       const token = await this.storage.getToken();
       await this.viajeService.actualizarEstadoViaje(this.nuevoEstado, this.viajeId, token);
       console.log('Estado del viaje actualizado con éxito');
-      this.mostrarMensajeActualizacionExito();  // Mostrar toast de éxito
-      this.obtenerViajes(); // Refrescar la lista de viajes
+      this.mostrarMensajeActualizacionExito();
+      this.obtenerViajes();
     } catch (error) {
       console.error('Error al actualizar el estado del viaje:', error);
     }

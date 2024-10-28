@@ -10,7 +10,6 @@ export class ViajeService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para agregar viaje
   async agregarViaje(data: bodyViaje) {
     try {
       const response = await lastValueFrom(
@@ -31,7 +30,7 @@ export class ViajeService {
     const body = {
       p_id_estado: p_id_estado,
       p_id: p_id,
-      token: token // Incluimos el token en el cuerpo
+      token: token
     };
   
     try {
@@ -52,7 +51,6 @@ export class ViajeService {
     }
   }
 
-  // Método para obtener viajes por usuario específico
   obtenerViajesPorUsuario(userId: number, token: string): Observable<EndPointViaje> {
     const params = new HttpParams()
       .set('p_id_usuario', userId.toString())
@@ -61,7 +59,6 @@ export class ViajeService {
     return this.http.get<EndPointViaje>(`${environment.apiUrl}/viaje/obtener`, { params });
   }
 
-  // Método para obtener todos los viajes (de todos los usuarios)
   obtenerTodosLosViajes(token: string): Observable<EndPointViaje> {
     const params = new HttpParams().set('token', token);
     return this.http.get<EndPointViaje>(`${environment.apiUrl}/viaje/obtener`, { params });
@@ -69,7 +66,6 @@ export class ViajeService {
 
 }
 
-// Interfaces
 interface bodyViaje {
   p_id_usuario: number;
   p_ubicacion_origen: string;
