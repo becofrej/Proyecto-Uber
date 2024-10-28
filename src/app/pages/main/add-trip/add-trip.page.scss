@@ -9,8 +9,19 @@ $shadow-color: rgba(0, 0, 0, 0.1);
 $hover-shadow-color: rgba(0, 0, 0, 0.15);
 
 // Fondo general
-ion-content {
-  background-color: $background-color;
+.addtrip-content {
+  --background: #f4f6f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100hv;
+}
+
+.addtrip-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
 }
 
 // Contenedor del formulario
@@ -19,37 +30,28 @@ ion-content {
   border-radius: 10px;
   box-shadow: 0px 4px 12px $shadow-color;
   background-color: $input-background;
+  margin-bottom: 1rem; // Espaciado inferior para separar del panel publicitario
 }
 
 // Campo del formulario
 .form-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem; // Reduce ligeramente para compactar el formulario
 
   ion-label {
     font-size: 0.9rem;
     font-weight: bold;
     color: $label-color;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem; // Reduce para mejor alineación
   }
 
-  ion-input {
+  ion-input, ion-select {
     background-color: $input-background;
     border-radius: 8px;
     padding: 0.6rem;
     border: 1px solid $border-color;
     box-shadow: 0px 2px 4px $shadow-color;
-  }
-
-  // Botón de seleccionar vehículo
-  ion-button[id="modal-trigger"] {
-    background-color: lighten($button-color, 10%);
-    color: white;
-    font-weight: 600;
-    border-radius: 8px;
-    padding: 0.8rem;
-    box-shadow: 0px 3px 8px $shadow-color;
   }
 }
 
@@ -61,46 +63,7 @@ ion-button[type="submit"] {
   border-radius: 8px;
   box-shadow: 0px 4px 10px $shadow-color;
   width: 100%;
-  margin-top: 1.5rem;
-}
-
-// Estilos del modal
-ion-modal {
-  .modal-wrapper {
-    border-radius: 10px;
-    padding: 1.2rem;
-  }
-
-  ion-header {
-    ion-toolbar {
-      --background: $primary-color;
-      z-index: 10;  // Aseguramos que la barra de herramientas esté por encima
-
-      ion-title {
-        font-weight: bold;
-        color: white;
-      }
-
-      ion-buttons {
-        z-index: 11;  // Aseguramos que el botón esté por encima de todo
-      }
-
-      ion-button {
-        background-color: darken($primary-color, 10%);
-        color: white;
-        font-weight: bold;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        opacity: 1;  // Aseguramos que la opacidad sea completa
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);  // Sombra clara para resaltar el botón
-
-        &:hover {
-          opacity: 1;
-          background-color: lighten($primary-color, 5%);
-        }
-      }
-    }
-  }
+  margin-top: 1.2rem; // Reduce un poco para alineación
 }
 
 // Panel publicitario
@@ -111,16 +74,28 @@ ion-modal {
   width: 100%;
   background-color: $primary-color;
   color: white;
-  padding: 1rem;
+  padding: 0.8rem;
   text-align: center;
-  overflow: hidden;
   display: flex;
   justify-content: center;
+  overflow: hidden;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
+// Animación del texto del panel publicitario
 .scrolling-text {
   white-space: nowrap;
   font-weight: bold;
   font-size: 1rem;
+  animation: scroll-text 10s linear infinite; // Añade la animación de desplazamiento
+}
+
+// Definición de la animación de desplazamiento
+@keyframes scroll-text {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

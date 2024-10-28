@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class VehiculoService {
 
-  private apiUrl = `${environment.apiUrl}/vehiculo`;
+  private apiUrl = `${environment.apiUrl}/vehiculo`;  // Uso correcto del template literal
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +28,7 @@ export class VehiculoService {
       formData.append('image', imageFile.file, imageFile.fname);  // Enviar la imagen si está disponible
     }
 
-    return this.http.post<any>(`${this.apiUrl}/agregar`, formData);
+    return this.http.post<any>(`${this.apiUrl}/agregar`, formData);  // Uso correcto del template literal
   }
 
   // Servicio para obtener un vehículo específico
@@ -37,7 +37,7 @@ export class VehiculoService {
       .set('id_vehiculo', idVehiculo.toString())
       .set('token', token);
 
-    return this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params });
+    return this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params });  // Uso correcto del template literal
   }
 
   // Servicio para obtener todos los vehículos asociados a un usuario
@@ -45,7 +45,7 @@ export class VehiculoService {
     try {
       const params = new HttpParams().set('token', token);
       const response = await lastValueFrom(
-        this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params })
+        this.http.get<EndPointVehiculo>(`${this.apiUrl}/obtener`, { params })  // Uso correcto del template literal
       );
       return response;
     } catch (error) {
@@ -53,7 +53,6 @@ export class VehiculoService {
     }
   }
 }
-
 
 interface EndPointVehiculo {
   message: string;

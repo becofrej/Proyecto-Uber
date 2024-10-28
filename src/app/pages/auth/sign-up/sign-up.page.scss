@@ -1,0 +1,54 @@
+.auth-content {
+    --background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // Centra el contenido verticalmente en toda la pantalla
+    padding: 1rem;
+  }
+  
+  .auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 360px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; // Asegura que el contenedor esté centrado horizontalmente
+  }
+  
+  .custom-input {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .photo-button {
+    background-color: #4a90e2;
+    color: #fff;
+    width: 100%;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  .custom-register-button {
+    background-color: #34a853;
+    color: #fff;
+    width: 100%;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  .validators {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+  }

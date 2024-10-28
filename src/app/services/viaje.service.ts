@@ -22,7 +22,6 @@ export class ViajeService {
     }
   } 
 
-
   async actualizarEstadoViaje(p_id_estado: number, p_id: number, token: string): Promise<any> {
     const url = `https://uber-nodejs-server-git-d61f89-guillermovillacuratorres-projects.vercel.app/api/viaje/actualiza_estado_viaje`;
     const headers = {
@@ -52,8 +51,8 @@ export class ViajeService {
       throw error;
     }
   }
-  
-  // Método para obtener viajes por usuario
+
+  // Método para obtener viajes por usuario específico
   obtenerViajesPorUsuario(userId: number, token: string): Observable<EndPointViaje> {
     const params = new HttpParams()
       .set('p_id_usuario', userId.toString())
@@ -62,6 +61,11 @@ export class ViajeService {
     return this.http.get<EndPointViaje>(`${environment.apiUrl}/viaje/obtener`, { params });
   }
 
+  // Método para obtener todos los viajes (de todos los usuarios)
+  obtenerTodosLosViajes(token: string): Observable<EndPointViaje> {
+    const params = new HttpParams().set('token', token);
+    return this.http.get<EndPointViaje>(`${environment.apiUrl}/viaje/obtener`, { params });
+  }
 
 }
 

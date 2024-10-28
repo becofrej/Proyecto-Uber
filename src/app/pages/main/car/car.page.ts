@@ -9,7 +9,9 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./car.page.scss'],
 })
 export class CarPage implements OnInit {
-  vehiculos: any[] = []; // Array para almacenar todos los vehículos del usuario
+  vehiculos: any[] = []; // Array para almacenar todos los vehículos
+  filteredVehiculos: any[] = []; // Array para almacenar los vehículos filtrados
+  searchUserId: number | null = null; // ID de usuario para buscar
 
   constructor(
     private router: Router,
@@ -18,26 +20,32 @@ export class CarPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const userIdString = await this.storageService.getUserId();
     const token = await this.storageService.getItem('token');
 
-    if (userIdString && token) {
-      const userId = Number(userIdString);
-      
-      // Llama a obtenerVehiculosPorUsuario para obtener todos los vehículos del usuario
-      this.vehiculoService.obtenerVehiculosPorUsuario(token).then(
+    if (token) {
+      // Llama a obtenerTodosLosVehiculos para obtener todos los vehículos de todos los usuarios
+      this.vehiculoService.obtenerTodosLosVehiculos(token).then(
         (response) => {
-          // Filtra todos los vehículos que corresponden al userId
-          this.vehiculos = response.data.filter(
-            (vehiculo) => vehiculo.id_usuario === userId
-          );
+          this.vehiculos = response.data;  // Asigna todos los vehículos obtenidos
+          this.filteredVehiculos = this.vehiculos; // Inicialmente muestra todos los vehículos
         },
         (error) => {
           console.error('Error al obtener los vehículos:', error);
         }
       );
     } else {
-      console.log('No se encontró el ID del usuario o el token.');
+      console.log('No se encontró el token.');
+    }
+  }
+
+  // Método para filtrar vehículos por ID de usuario
+  filterVehiclesByUserId() {
+    if (this.searchUserId) {
+      this.filteredVehiculos = this.vehiculos.filter(
+        (vehiculo) => vehiculo.id_usuario === this.searchUserId
+      );
+    } else {
+      this.filteredVehiculos = this.vehiculos; // Muestra todos si no hay ID ingresado
     }
   }
 

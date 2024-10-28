@@ -1,22 +1,28 @@
 <app-header [showMenu]="true" title="Perfil"></app-header>
 
-<ion-content class="ion-padding-top ion-text-center">
-  <ion-avatar>
-    <img alt="Avatar" [src]="userImage" />
-  </ion-avatar>
+<ion-content class="profile-content ion-padding">
 
-  <ion-button class="photo-button" mode="ios" size="small" shape="round">
-    <ion-icon name="camera-outline"></ion-icon>
-  </ion-button>
-
-  <h3>{{ userName }}</h3>  <!-- Muestra el nombre real del usuario -->
-  <div>
-    Correo: {{ userEmail }} <!-- Muestra el correo real del usuario -->
-    <br/>
-    Teléfono: {{ userPhone }} <!-- Muestra el teléfono real del usuario -->
-    <br/>
-    Conductor
-    <br/>
-    Clasificación: 4.2 <!-- Este dato se mantiene falso -->
+  <!-- Avatar Section -->
+  <div class="profile-avatar">
+    <ion-avatar>
+      <img alt="Avatar" [src]="userImage" />
+    </ion-avatar>
+    <ion-button class="photo-button" mode="ios" size="small" shape="round">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
   </div>
+
+  <!-- User Information Section -->
+  <ion-card class="profile-card">
+    <ion-card-header>
+      <h2>{{ userName }}</h2>
+      <ion-text color="medium">Conductor</ion-text>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Correo: {{ userEmail }}</p>
+      <p>Teléfono: {{ userPhone }}</p>
+      <p>Clasificación: 4.2</p>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

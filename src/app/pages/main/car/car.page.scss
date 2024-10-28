@@ -1,6 +1,52 @@
-.no-vehicles-message {
-    text-align: center;
-    padding: 20px;
-    font-size: 1.2em;
-    color: var(--ion-color-medium);
+ion-content {
+  --padding-top: 0;
+  --background: #f4f6f9;
+
+  .search-bar {
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   }
+
+  .vehicle-list {
+    padding: 0 1rem;
+  }
+
+  .vehicle-item {
+    border-radius: 12px;
+    margin: 0.5rem 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    --background: #ffffff;
+    transition: transform 0.2s ease-in-out;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .vehicle-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .vehicle-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.2rem;
+  }
+
+  .vehicle-details {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .no-vehicles-message {
+    text-align: center;
+    font-size: 1rem;
+    color: #888;
+    margin-top: 2rem;
+  }
+}
