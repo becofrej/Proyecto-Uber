@@ -2,6 +2,7 @@ import { Preferences } from '@capacitor/preferences';
 import { getAuth, signOut } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-main',
@@ -26,6 +27,34 @@ export class MainPage implements OnInit {
   auth = getAuth(); // Inicializar Firebase Authentication
   currentPath: string = '';
 
+  constructor(private alertController: AlertController) {}
+
+  // Mostrar confirmación de cierre de sesión
+  async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar sesión',
+      message: '¿Estás seguro de que deseas cerrar sesión?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cierre de sesión cancelado');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.goAuth();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  // Cerrar sesión y redirigir al login
   async goAuth() {
     try {
       // Limpiar solo los datos de usuario almacenados en Preferences (sin borrar todo)
@@ -40,7 +69,7 @@ export class MainPage implements OnInit {
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
-  }  
+  }
 
   async ngOnInit() {
     // Recuperar los datos del usuario de Preferences
