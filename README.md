@@ -60,6 +60,22 @@ decir, se debe animar desde una interacción con el usuario.
 
 ---
 
+## Evaluación 3 (Test o pruebas)
+### Procesos:
+Ejecuta el siguiente comando para iniciar las pruebas: `npm run test`
+
+- Las pruebas se realizan gracias a Jasmine
+- Archivos spec son los que manejan las pruebas
+- Puede ser cualquier prueba, se necesita una.
+
+### Iconos:
+- Icon 1024px X 1024px
+- Icon splash 2732px X 2732px
+- Se recomienda usar PowerToys para la redimension de imágenes.
+
+El formato puede ser jpg o png
+---
+
 ### API del docente:
 https://uber-nodejs-server-git-d61f89-guillermovillacuratorres-projects.vercel.app/api/
 
