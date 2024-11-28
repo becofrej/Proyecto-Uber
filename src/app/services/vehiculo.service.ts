@@ -21,11 +21,13 @@ export class VehiculoService {
     formData.append('p_color', data.p_color);
     formData.append('p_tipo_combustible', data.p_tipo_combustible);
     formData.append('token', data.token);
-
+  
     if (imageFile) {
       formData.append('image', imageFile.file, imageFile.fname);
     }
-
+  
+    console.log('Datos preparados para enviar:', formData);
+  
     return this.http.post<any>(`${this.apiUrl}/agregar`, formData);
   }
 
