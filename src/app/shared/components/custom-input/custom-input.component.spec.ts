@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms'; 
 
 import { CustomInputComponent } from './custom-input.component';
 
@@ -9,8 +10,11 @@ describe('CustomInputComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomInputComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [CustomInputComponent],
+      imports: [
+        IonicModule.forRoot(),
+        ReactiveFormsModule, 
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CustomInputComponent);
