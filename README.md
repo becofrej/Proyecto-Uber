@@ -26,7 +26,7 @@ Ejecuta el siguiente comando para iniciar las pruebas: `npm run test`
 
 ### Pruebas creadas
 1. auth.page.spec.ts (Test para verificar si el formulario del Login es inválido, no se llaman los servicios)
-2. sign-up.page.ts (Test para que no se intente agregar un usuario si el formulario es inválido)
+2. sign-up.page.spec.ts (Test para que no se intente agregar un usuario si el formulario es inválido)
 ---
 
 ### API del docente:
