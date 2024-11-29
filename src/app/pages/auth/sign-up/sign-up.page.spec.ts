@@ -115,4 +115,21 @@ describe('SignUpPage', () => {
       'Información'
     );
   });
+
+  // Prueba para que no se intente agregar un usuario si el formulario es inválido
+  it('should not submit the form if it is invalid', async () => {
+    component.form.setValue({
+      name: 'Test User',
+      email: 'test@example.com',
+      phone: '',
+      password: 'password123',
+    });
+  
+    await component.submit();
+  
+    expect(mockFirebaseService.registro).not.toHaveBeenCalled();
+    expect(mockUsuarioService.agregarUsuario).not.toHaveBeenCalled();
+  
+    expect(mockHelperService.showAlert).not.toHaveBeenCalled();
+  });
 });

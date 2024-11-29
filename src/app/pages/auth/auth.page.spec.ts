@@ -123,4 +123,20 @@ describe('AuthPage', () => {
       'Bienvenido'
     );
   });
+
+  // Prueba para verificar que si e formulario de Login es inválido, no se llaman los servicios
+  it('should not log in the user if the form is invalid', async () => {
+    component.form.setValue({
+      email: 'invalid@example.com',
+      password: '',
+    });
+  
+    await component.login();
+  
+    expect(mockFirebaseService.login).not.toHaveBeenCalled();
+    expect(mockUsuarioService.obtenerUsuario).not.toHaveBeenCalled();
+  
+    expect(mockHelperService.showAlert).not.toHaveBeenCalled();
+  });
+
 });
