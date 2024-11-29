@@ -15,7 +15,6 @@ describe('TripPage', () => {
   let toastController: jasmine.SpyObj<ToastController>;
 
   beforeEach(async () => {
-    // Crear mocks para los servicios
     mockViajeService = jasmine.createSpyObj('ViajeService', [
       'obtenerTodosLosViajes',
       'actualizarEstadoViaje',
@@ -26,7 +25,6 @@ describe('TripPage', () => {
     ]);
     toastController = jasmine.createSpyObj('ToastController', ['create']);
 
-    // Configurar mocks para devolver valores simulados
     mockViajeService.obtenerTodosLosViajes.and.returnValue(
       of({
         message: 'success',
@@ -54,7 +52,7 @@ describe('TripPage', () => {
     );
 
     mockViajeService.actualizarEstadoViaje.and.returnValue(
-      Promise.resolve({ message: 'Estado actualizado correctamente' }) // Simulación del servicio
+      Promise.resolve({ message: 'Estado actualizado correctamente' })
     );
 
     mockStorageService.getItem.and.callFake((key: string) => {
@@ -64,19 +62,19 @@ describe('TripPage', () => {
       return Promise.resolve(null);
     });
 
-    mockStorageService.getToken.and.returnValue(Promise.resolve('mockToken')); // Simulación de getToken
+    mockStorageService.getToken.and.returnValue(Promise.resolve('mockToken'));
 
     await TestBed.configureTestingModule({
       declarations: [TripPage],
       imports: [
-        HttpClientTestingModule, // Para manejar solicitudes HTTP
-        RouterTestingModule, // Para manejar navegación en pruebas
-        IonicModule.forRoot(), // Módulos de Ionic
+        HttpClientTestingModule,
+        RouterTestingModule,
+        IonicModule.forRoot(),
       ],
       providers: [
-        { provide: ViajeService, useValue: mockViajeService }, // Usar el mock del servicio
-        { provide: StorageService, useValue: mockStorageService }, // Usar el mock del almacenamiento
-        { provide: ToastController, useValue: toastController }, // Usar el mock del ToastController
+        { provide: ViajeService, useValue: mockViajeService },
+        { provide: StorageService, useValue: mockStorageService },
+        { provide: ToastController, useValue: toastController },
       ],
     }).compileComponents();
 
@@ -102,7 +100,6 @@ describe('TripPage', () => {
     );
     expect(component.viajes.length).toBe(1);
 
-    // Test filtering by user ID
     component.searchUserId = 123;
     component.filterTripsByUserId();
     expect(component.filteredViajes.length).toBe(1);

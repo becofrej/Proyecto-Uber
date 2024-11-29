@@ -12,7 +12,6 @@ describe('FirebaseService', () => {
   let mockStorageService: jasmine.SpyObj<StorageService>;
 
   beforeEach(() => {
-    // Crear mocks
     mockAngularFireAuth = jasmine.createSpyObj('AngularFireAuth', [
       'signInWithEmailAndPassword',
     ]);
@@ -40,7 +39,7 @@ describe('FirebaseService', () => {
         message: 'Success',
         data: [
           {
-            id_usuario: 123, // Corregido a número
+            id_usuario: 123,
             nombre: 'Test User',
             correo_electronico: 'test@example.com',
             telefono: '1234567890',
@@ -53,12 +52,12 @@ describe('FirebaseService', () => {
 
     mockStorageService.setUserId.and.callFake(async (userId: string) => {
       console.log(`Mock setUserId called with: ${userId}`);
-      return Promise.resolve(); // Retorna una promesa
+      return Promise.resolve();
     });
     mockStorageService.setItem.and.callFake(
       async (key: string, value: string) => {
         console.log(`Mock setItem called with: ${key}, ${value}`);
-        return Promise.resolve(); // Retorna una promesa
+        return Promise.resolve();
       }
     );
 
@@ -81,7 +80,7 @@ describe('FirebaseService', () => {
   it('should log in the user', async () => {
     await service.login('test@example.com', 'password123');
 
-    expect(mockStorageService.setUserId).toHaveBeenCalledWith('123'); // Validación corregida
+    expect(mockStorageService.setUserId).toHaveBeenCalledWith('123');
     expect(mockStorageService.setItem).toHaveBeenCalledWith(
       'token',
       'mockToken'

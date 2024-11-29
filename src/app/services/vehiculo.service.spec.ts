@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importa el módulo de pruebas HTTP
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { VehiculoService } from './vehiculo.service';
 
 describe('VehiculoService', () => {
@@ -7,10 +7,10 @@ describe('VehiculoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // Asegúrate de importar este módulo
-      providers: [VehiculoService], // Proporciona el servicio a probar
+      imports: [HttpClientTestingModule],
+      providers: [VehiculoService],
     });
-    service = TestBed.inject(VehiculoService); // Inyecta el servicio
+    service = TestBed.inject(VehiculoService);
   });
 
   it('should be created', () => {

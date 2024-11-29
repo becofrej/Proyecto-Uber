@@ -18,9 +18,8 @@ describe('AddCarPage', () => {
   let mockStorageService: jasmine.SpyObj<StorageService>;
 
   beforeEach(async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000; // Aumentar tiempo global
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
-    // Crear mocks para los servicios
     mockVehiculoService = jasmine.createSpyObj('VehiculoService', [
       'agregarVehiculo',
     ]);
@@ -30,7 +29,6 @@ describe('AddCarPage', () => {
     ]);
     mockStorageService = jasmine.createSpyObj('StorageService', ['getItem']);
 
-    // Configurar los mocks
     mockVehiculoService.agregarVehiculo.and.returnValue(
       of({ message: 'Vehículo registrado correctamente' })
     );
@@ -114,12 +112,12 @@ describe('AddCarPage', () => {
   });
 
   it('should capture photo', async () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000; // Extender tiempo de espera global
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
     const mockImage = {
       webPath: 'http://example.com/image.jpg',
       format: 'jpg',
-      saved: true, // Incluye la propiedad requerida
+      saved: true,
     };
 
     spyOn(Camera, 'getPhoto').and.returnValue(Promise.resolve(mockImage));

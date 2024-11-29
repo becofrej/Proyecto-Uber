@@ -14,13 +14,11 @@ describe('CarPage', () => {
   let mockStorageService: jasmine.SpyObj<StorageService>;
 
   beforeEach(async () => {
-    // Crear mocks para los servicios
     mockVehiculoService = jasmine.createSpyObj('VehiculoService', [
       'obtenerTodosLosVehiculos',
     ]);
     mockStorageService = jasmine.createSpyObj('StorageService', ['getItem']);
 
-    // Configurar el mock de obtenerTodosLosVehiculos
     mockVehiculoService.obtenerTodosLosVehiculos.and.returnValue(
       Promise.resolve({
         message: 'success',
@@ -44,8 +42,6 @@ describe('CarPage', () => {
         ],
       })
     );
-
-    // Configurar el mock de getItem
     mockStorageService.getItem.and.callFake((key: string) => {
       if (key === 'token') return Promise.resolve('mockToken');
       return Promise.resolve(null);
@@ -54,13 +50,13 @@ describe('CarPage', () => {
     await TestBed.configureTestingModule({
       declarations: [CarPage],
       imports: [
-        HttpClientTestingModule, // Para manejar solicitudes HTTP
-        RouterTestingModule, // Para simular la navegación
-        IonicModule.forRoot(), // Módulos de Ionic
+        HttpClientTestingModule,
+        RouterTestingModule,
+        IonicModule.forRoot(),
       ],
       providers: [
-        { provide: VehiculoService, useValue: mockVehiculoService }, // Mock del servicio de vehículos
-        { provide: StorageService, useValue: mockStorageService }, // Mock del almacenamiento
+        { provide: VehiculoService, useValue: mockVehiculoService },
+        { provide: StorageService, useValue: mockStorageService },
       ],
     }).compileComponents();
 

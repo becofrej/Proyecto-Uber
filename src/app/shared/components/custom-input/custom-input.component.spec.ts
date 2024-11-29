@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { ReactiveFormsModule, FormControl } from '@angular/forms'; // Importar FormControl
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { CustomInputComponent } from './custom-input.component';
 
@@ -17,13 +17,12 @@ describe('CustomInputComponent', () => {
     fixture = TestBed.createComponent(CustomInputComponent);
     component = fixture.componentInstance;
 
-    // Configurar el FormControl simulado
-    component.control = new FormControl(''); // Crear un FormControl vacío
-    component.type = 'text'; // Configurar el tipo de input para la prueba
-    component.label = 'Test Label'; // Configurar un label de prueba
-    component.icon = 'person-outline'; // Asignar un ícono de prueba
+    component.control = new FormControl('');
+    component.type = 'text';
+    component.label = 'Test Label';
+    component.icon = 'person-outline';
 
-    fixture.detectChanges(); // Detectar cambios después de configurar los inputs
+    fixture.detectChanges();
   }));
 
   it('should create', () => {
@@ -32,10 +31,10 @@ describe('CustomInputComponent', () => {
 
   it('should toggle password visibility', () => {
     component.type = 'password';
-    component.showOrHidePassword(); // Llamar al método
-    expect(component.type).toBe('text'); // Debería cambiar a texto visible
+    component.showOrHidePassword();
+    expect(component.type).toBe('text');
 
     component.showOrHidePassword();
-    expect(component.type).toBe('password'); // Debería regresar a oculto
+    expect(component.type).toBe('password');
   });
 });
