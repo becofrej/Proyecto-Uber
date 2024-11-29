@@ -21,7 +21,7 @@ export class AddTripPage implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private storage: StorageService,
     private viajeService: ViajeService,
-    private toastController: ToastController 
+    private toastController: ToastController
   ) {}
 
   async ngOnInit() {
@@ -29,12 +29,14 @@ export class AddTripPage implements OnInit, AfterViewInit {
       origen: ['', Validators.required],
       destino: ['', Validators.required],
       costo: [10000, Validators.required],
-      vehiculo_id: ['', Validators.required]
+      vehiculo_id: ['', Validators.required],
     });
 
-    this.token = await this.storage.getItem('token') || '';
+    this.token = (await this.storage.getItem('token')) || '';
     const usuarioCompleto = await this.storage.getItem('usuarioCompleto');
-    this.idUsuario = usuarioCompleto ? JSON.parse(usuarioCompleto).id_usuario : null;
+    this.idUsuario = usuarioCompleto
+      ? JSON.parse(usuarioCompleto).id_usuario
+      : null;
 
     this.inicializarUbicaciones();
   }
@@ -44,11 +46,16 @@ export class AddTripPage implements OnInit, AfterViewInit {
       { nombre: 'DUOC: San Joaquin' },
       { nombre: 'Casa' },
       { nombre: 'Mall Costanera Center' },
-      { nombre: 'Movistar Arena' }
+      { nombre: 'Movistar Arena' },
     ];
   }
 
   async agregarViaje(origen: string, destino: string, vehiculo_id: number) {
+    if (this.tripForm.invalid) {
+      console.log('Formulario inválido. No se enviará el viaje.');
+      return;
+    }
+
     const viajeData = {
       p_id_usuario: this.idUsuario,
       p_ubicacion_origen: origen,
@@ -60,11 +67,10 @@ export class AddTripPage implements OnInit, AfterViewInit {
 
     try {
       const response = await this.viajeService.agregarViaje(viajeData);
-      console.log("Viaje registrado correctamente:", response);
-      console.log("Datos del viaje enviados:", JSON.stringify(viajeData));
+      console.log('Viaje registrado correctamente:', response);
       this.mostrarMensajeExito();
     } catch (error) {
-      console.error("Error al registrar el viaje:", error);
+      console.error('Error al registrar el viaje:', error);
     }
   }
 
@@ -73,7 +79,7 @@ export class AddTripPage implements OnInit, AfterViewInit {
       message: 'Viaje registrado correctamente',
       duration: 2000,
       color: 'success',
-      position: 'bottom'
+      position: 'bottom',
     });
     await toast.present();
   }

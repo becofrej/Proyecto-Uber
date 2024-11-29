@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing'; 
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importar el módulo de pruebas HTTP
 
 import { UsuarioService } from './usuario.service';
 
@@ -8,12 +8,12 @@ describe('UsuarioService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClientTesting()], 
+      imports: [HttpClientTestingModule], // Incluir el módulo HTTP
     });
-    service = TestBed.inject(UsuarioService); 
+    service = TestBed.inject(UsuarioService); // Inyectar el servicio
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy(); 
+    expect(service).toBeTruthy(); // Verificar que el servicio se crea correctamente
   });
 });

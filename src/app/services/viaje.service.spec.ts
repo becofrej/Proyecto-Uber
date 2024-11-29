@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing'; 
-
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Asegúrate de importar este módulo
 import { ViajeService } from './viaje.service';
 
 describe('ViajeService', () => {
@@ -8,12 +7,13 @@ describe('ViajeService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClientTesting()], 
+      imports: [HttpClientTestingModule], // Importa el módulo de pruebas HTTP
+      providers: [ViajeService], // Proporciona el servicio a probar
     });
-    service = TestBed.inject(ViajeService); 
+    service = TestBed.inject(ViajeService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy(); 
+    expect(service).toBeTruthy();
   });
 });
